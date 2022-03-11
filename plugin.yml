@@ -1,0 +1,17 @@
+name: "ChatBubbles"
+author: TheTealViper
+version: "1.18.1.a.2"
+api-version: 1.18
+description: "ChatBubbles above players' heads"
+main: me.TheTealViper.chatbubbles.ChatBubbles
+softdepend: [Factions, PlaceholderAPI, HolographicDisplays, DecentHolograms]
+commands:
+  chatbubble:
+    description: Main command
+    aliases: [cb]
+  chatbubblereload:
+    description: Main command
+    aliases: [cbreload]
+  chatbubbletoggle:
+    description: Toggle sending chatbubbles
+    aliases: [cbtoggle,cbt]

@@ -1,0 +1,125 @@
+##########################################################
+#                   ChatBubbles Config                   #
+##########################################################
+
+ChatBubble_Configuration_Mode: 0
+#0 - Every chat message becomes a ChatBubble
+#1 - Command messages starting with "/cb <message>" become a ChatBubble
+#2 - Every chat message is visible as a ChatBubble to players in the same ChatBubble permission group
+#3 - Every chat message is visible as a ChatBubble to players in the same Faction
+#4 - Every chat message appears only in text chat like vanilla but still allows a noise to be played
+
+##############################
+#      Universal Config      #
+##############################
+
+ChatBubble_Life: 120
+#This is how long the ChatBubble will live measured in ticks
+#Note: 20 ticks = 1 second
+
+ChatBubble_Height_Offset: 2.5
+#This is the distance from the player the chatbubble is placed
+#It's best not to touch this unless you have a custom nametag plugin
+#Explaining how this number works is kind of confusing so if you
+#need to change it just do so on a trial and error basis.
+#The bigger the number, the higher the bubble goes above the head.
+
+ChatBubble_Utilize_Distance: true
+#Enabling this will set ChatBubbles only viewable by a configurable distance but may result in more lag
+ChatBubble_Viewing_Distance: 15
+#This is measured in a circle radius of blocks
+
+ChatBubble_Message_Format:
+ - "[%player_name%]"
+ - "%chatbubble_message%"
+#This is the format that the messages will come out in. Placeholders can be utilized here from PlaceholderAPI
+#ChatBubble Placeholders:
+# - %chatbubble_message% : This is the placeholder of the actual message
+
+ChatBubble_Message_Prefix: ""
+#This is the prefix shown before every line of the message in the bubble
+ChatBubble_Message Suffix: ""
+#This is the suffix shown after every line of the message in the bubble
+
+ChatBubble_Maximum_Line_Length: 20
+#Want long, narrow bubbles or short, wide bubbles? This is how you change that
+
+ChatBubble_See_Own_Bubbles: true
+#Enabling this allows players to see their own bubbles
+
+ChatBubble_Send_Original_Message: true
+#Enabling this will also send the ChatBubble message through normal chat
+
+ChatBubble_Strip_Formatting: true
+#Enabling this will strip all formatting from messages to fix newline oddities
+
+ChatBubble_EventPriority: "NORMAL"
+#If you know what this is and want to change it, go for it. If you don't, then don't touch it.
+#Options:
+# HIGH
+# HIGHEST
+# LOW
+# LOWEST
+# MONITOR
+# NORMAL
+
+##############################
+#        Sound Config        #
+##############################
+
+ChatBubble_Play_Sound: true
+#If this is set to true, chatbubbles will appear with a sound.
+
+ChatBubble_Sound_Name: "block.note_block.bell"
+#This is the name of the sound. It can be vanilla or from a custom resource pack.
+#Vanilla sounds can be found https://www.digminecraft.com/lists/sound_list_pc.php
+#Custom resource pack sounds can be tested and found by using the /playsound command.
+#If it works in /playsound, it will work here.
+
+ChatBubble_Sound_Volume: 1.0
+#It's suggested you don't touch this.
+#This controls how far away players can hear the chat bubble.
+#It should not be set lower than 1.0.
+#Larger numbers means the sound travels farther.
+
+##############################
+#          0 Config          #
+##############################
+
+ConfigZero_Require_Permissions: true
+#Enabling this requires players to have the permission to get a ChatBubble
+ConfigZero_Use_Permission: "chatbubble.use"
+#This is the permission necessary to get a ChatBubble
+ConfigZero_See_Permission: "chatbubble.see"
+#This is the permission necessary to see a ChatBubble
+
+##############################
+#          1 Config          #
+##############################
+
+#This configuration mode uses "ChatBubble_Send_Original_Message" found in the 
+#"Universal Config" to determine whether ChatBubble messages also get sent in chat
+
+ConfigOne_Require_Permissions: true
+#Enabling this requires players to have the permission to get a ChatBubble
+ConfigOne_Use_Permission: "chatbubble.use"
+#This is the permission necessary to get a ChatBubble
+ConfigOne_See_Permission: "chatbubble.see"
+#This is the permission necessary to see a ChatBubble
+
+##############################
+#          2 Config          #
+##############################
+
+ConfigTwo_Permission_Groups:
+ - "chatbubble.group.default"
+ - "chatbubble.group.ExaMPle"
+ - "chatbubble.group.GroUps"
+#These are the possible groups. Add to or remove from freely
+
+##########################################################
+#                        Version                         #
+##########################################################
+
+VERSION: 7
+#Do not touch this. No touchy.
