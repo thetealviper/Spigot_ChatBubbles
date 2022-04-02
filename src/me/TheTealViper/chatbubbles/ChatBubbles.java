@@ -14,7 +14,14 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import me.TheTealViper.chatbubbles.implentations.*;
+import me.TheTealViper.chatbubbles.implentations.ChatListenerHIGH;
+import me.TheTealViper.chatbubbles.implentations.ChatListenerHIGHEST;
+import me.TheTealViper.chatbubbles.implentations.ChatListenerLOW;
+import me.TheTealViper.chatbubbles.implentations.ChatListenerLOWEST;
+import me.TheTealViper.chatbubbles.implentations.ChatListenerMONITOR;
+import me.TheTealViper.chatbubbles.implentations.ChatListenerNORMAL;
+import me.TheTealViper.chatbubbles.implentations.DecentHologramsImplementation;
+import me.TheTealViper.chatbubbles.implentations.HolographicDisplaysImplementation;
 import me.TheTealViper.chatbubbles.utils.EnableShit;
 import me.TheTealViper.chatbubbles.utils.PluginFile;
 import net.md_5.bungee.api.ChatColor;
@@ -156,38 +163,57 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 	}
 	
 	public void handleZero(String message, Player p){
-		if(foundHolographicDisplays)
-			HDI.handleZero(message, p);
-		else if(foundDecentHolograms)
-			DHI.handleZero(message, p);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
+			if(foundHolographicDisplays)
+				HDI.handleZero(message, p);
+			else if(foundDecentHolograms)
+				DHI.handleZero(message, p);
+		}}, 0);
 	}
 	
 	public void handleOne(String message, Player p){
-		if(foundHolographicDisplays)
-			HDI.handleOne(message, p);
-		else if(foundDecentHolograms)
-			DHI.handleOne(message, p);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
+			if(foundHolographicDisplays)
+				HDI.handleOne(message, p);
+			else if(foundDecentHolograms)
+				DHI.handleOne(message, p);
+		}}, 0);
 	}
 	
 	public void handleTwo(String message, Player p){
-		if(foundHolographicDisplays)
-			HDI.handleTwo(message, p);
-		else if(foundDecentHolograms)
-			DHI.handleTwo(message, p);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
+			if(foundHolographicDisplays)
+				HDI.handleTwo(message, p);
+			else if(foundDecentHolograms)
+				DHI.handleTwo(message, p);
+		}}, 0);
 	}
 	
 	public void handleThree(String message, Player p){
-		if(foundHolographicDisplays)
-			HDI.handleThree(message, p);
-		else if(foundDecentHolograms)
-			DHI.handleThree(message, p);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
+			if(foundHolographicDisplays)
+				HDI.handleThree(message, p);
+			else if(foundDecentHolograms)
+				DHI.handleThree(message, p);
+		}}, 0);
 	}
 	
 	public void handleFour(String message, Player p){
-		if(foundHolographicDisplays)
-			HDI.handleFour(message, p);
-		else if(foundDecentHolograms)
-			DHI.handleFour(message, p);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
+			if(foundHolographicDisplays)
+				HDI.handleFour(message, p);
+			else if(foundDecentHolograms)
+				DHI.handleFour(message, p);
+		}}, 0);
+	}
+	
+	public void handleFive(String message, Player p){
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
+			if(foundHolographicDisplays)
+				HDI.handleFive(message, p);
+			else if(foundDecentHolograms)
+				DHI.handleFive(message, p);
+		}}, 0);
 	}
 	
 //------------------------Utilities--------------------------------

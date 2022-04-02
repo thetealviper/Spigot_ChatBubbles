@@ -6,7 +6,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/My Documents/Minecraft Stuff/1.18 Plugin Tester/plugins/DecentHolograms-2.3.0.jar">
+	<classpathentry kind="lib" path="D:/My Documents/Minecraft Stuff/DecentHolograms-2.3.0.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

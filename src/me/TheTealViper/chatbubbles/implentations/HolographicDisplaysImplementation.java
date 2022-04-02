@@ -148,7 +148,7 @@ public class HolographicDisplaysImplementation {
 			}
 		}
 		String permGroup = "";
-		for(String testPerm : plugin.getConfig().getStringList("ConfigTwo_Permision_Groups")){
+		for(String testPerm : plugin.getConfig().getStringList("ConfigTwo_Permission_Groups")){
 			if(p.hasPermission(testPerm)){
 				permGroup = testPerm;
 				break;
@@ -257,6 +257,65 @@ public class HolographicDisplaysImplementation {
 	public void handleFour(String message, Player p){
 		if(!plugin.togglePF.getBoolean(p.getUniqueId().toString()))
 			return;
+		
+		if(plugin.getConfig().getBoolean("ChatBubble_Play_Sound")) {
+			String sound = plugin.getConfig().getString("ChatBubble_Sound_Name").toLowerCase();
+			float volume = (float) plugin.getConfig().getDouble("ChatBubble_Sound_Volume");
+			if(!sound.equals("")) {
+				try {
+					p.getWorld().playSound(p.getLocation(), sound, volume, 1.0f);
+				}catch(Exception e) {
+					plugin.getServer().getConsoleSender().sendMessage("Something is wrong in your ChatBubble config.yml sound settings!");
+					plugin.getServer().getConsoleSender().sendMessage("Please ensure that 'ChatBubble_Sound_Name' works in a '/playsound' command test.");
+				}
+			}
+		}
+	}
+	
+	public void handleFive(String message, Player p){
+		boolean sendOriginal = false;
+		boolean requirePerm = plugin.getConfig().getBoolean("ConfigFive_Require_Permissions");
+		String usePerm = plugin.getConfig().getString("ConfigFive_Use_Permission");
+		String seePerm = plugin.getConfig().getString("ConfigFive_See_Permission");
+		if(requirePerm && !p.hasPermission(usePerm))
+			return;
+		if(!plugin.togglePF.getBoolean(p.getUniqueId().toString()))
+			return;
+		if(existingHolograms.containsKey(p.getUniqueId())) {
+			for(Hologram h : existingHolograms.get(p.getUniqueId())) {
+				if(!h.isDeleted())
+					h.delete();
+			}
+		}
+		final Hologram hologram = HologramsAPI.createHologram(plugin, p.getLocation().add(0.0, plugin.bubbleOffset, 0.0));
+		List<Hologram> hList = new ArrayList<Hologram>();
+		hList.add(hologram);
+		existingHolograms.put(p.getUniqueId(), hList);
+		hologram.getVisibilityManager().setVisibleByDefault(false);
+		for(Player oP : Bukkit.getOnlinePlayers()){
+			if(((plugin.seeOwnBubble) || (!plugin.seeOwnBubble && oP.getName() != p.getName())) 
+					&& (oP.getWorld().getName().equals(p.getWorld().getName()) 
+					&& oP.getLocation().distance(p.getLocation()) <= plugin.distance) 
+					&& (!requirePerm || (requirePerm && oP.hasPermission(seePerm)))
+					&& oP.canSee(p))
+				hologram.getVisibilityManager().showTo(oP);
+		}
+		int lines = formatHologramLines(p, hologram, message);
+		if(sendOriginal)
+			p.chat(message);
+
+		new BukkitRunnable() {
+			int ticksRun = 0;
+			@Override
+			public void run() {
+				ticksRun++;
+				if(!hologram.isDeleted())
+					hologram.teleport(p.getLocation().add(0.0, plugin.bubbleOffset + .25 * lines, 0.0));
+				if (ticksRun > plugin.life) {
+					hologram.delete();
+					cancel();
+				}
+		}}.runTaskTimer(plugin, 1L, 1L);
 		
 		if(plugin.getConfig().getBoolean("ChatBubble_Play_Sound")) {
 			String sound = plugin.getConfig().getString("ChatBubble_Sound_Name").toLowerCase();
