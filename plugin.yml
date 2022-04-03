@@ -1,10 +1,10 @@
 name: "ChatBubbles"
 author: TheTealViper
-version: "1.18.1.a.4"
+version: "1.18.1.a.5"
 api-version: 1.18
 description: "ChatBubbles above players' heads"
 main: me.TheTealViper.chatbubbles.ChatBubbles
-softdepend: [Factions, PlaceholderAPI, HolographicDisplays, DecentHolograms]
+softdepend: [Factions, PlaceholderAPI, HolographicDisplays, DecentHolograms, Citizens]
 commands:
   chatbubble:
     description: Main command
