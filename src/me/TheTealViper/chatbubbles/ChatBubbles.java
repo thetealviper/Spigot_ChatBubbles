@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.TheTealViper.chatbubbles.citizens.ChatBubbleTrait;
 import me.TheTealViper.chatbubbles.implentations.ChatListenerHIGH;
 import me.TheTealViper.chatbubbles.implentations.ChatListenerHIGHEST;
 import me.TheTealViper.chatbubbles.implentations.ChatListenerLOW;
@@ -32,11 +33,13 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 	public boolean seeOwnBubble = false;
 	public double bubbleOffset = 2.5;
 	public PluginFile togglePF;
-	private boolean foundHolographicDisplays = false;
-	private boolean foundDecentHolograms = false;
-	private HolographicDisplaysImplementation HDI;
-	private DecentHologramsImplementation DHI;
+	public boolean foundHolographicDisplays = false;
+	public boolean foundDecentHolograms = false;
+	private boolean useTrait = false;
+	public HolographicDisplaysImplementation HDI;
+	public DecentHologramsImplementation DHI;
 	public static EventPriority eventPriority;
+	private ChatBubbleTrait trait;
 	
 	public void onEnable(){
 		if(Bukkit.getServer().getPluginManager().getPlugin("HolographicDisplays") != null) {
@@ -54,6 +57,13 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 		DecentHologramsImplementation.plugin = this;
 		initVars();
 		togglePF = new PluginFile(this, "toggleData");
+		if(getServer().getPluginManager().getPlugin("Citizens") != null) {
+			if(getServer().getPluginManager().getPlugin("Citizens").isEnabled() == true && this.useTrait) {
+				Bukkit.getServer().getConsoleSender().sendMessage("[ChatBubbles] Citizens found and trait chatbubble enabled");
+				net.citizensnpcs.api.CitizensAPI.getTraitFactory().registerTrait(net.citizensnpcs.api.trait.TraitInfo.create(ChatBubbleTrait.class).withName("chatbubble"));
+				trait = new ChatBubbleTrait();
+			}					
+		}
 	}
 	
 	private void initVars() {
@@ -68,6 +78,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 			suffix = "";
 		seeOwnBubble = getConfig().getBoolean("ChatBubble_See_Own_Bubbles");
 		bubbleOffset = getConfig().getDouble("ChatBubble_Height_Offset");
+		useTrait = getConfig().getBoolean("Use_ChatBubble_Trait_Citizens");
 		switch(getConfig().getString("ChatBubble_EventPriority").toUpperCase()) {
 		case "HIGH":
 			eventPriority = EventPriority.HIGH;
@@ -103,6 +114,11 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 	}
 	
 	public void onDisable(){
+		if(getServer().getPluginManager().getPlugin("Citizens") != null) {
+			if(getServer().getPluginManager().getPlugin("Citizens").isEnabled() && this.useTrait) {
+				trait.onDisable();
+			}
+		}
 		getServer().getConsoleSender().sendMessage(makeColors("ChatBubbles from TheTealViper shutting down. Bshzzzzzz"));
 	}
 	

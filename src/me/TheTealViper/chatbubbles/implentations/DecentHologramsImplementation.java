@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -20,7 +21,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class DecentHologramsImplementation {
 	public static ChatBubbles plugin;
-	private Map<UUID, List<Hologram>> existingHolograms = new HashMap<UUID, List<Hologram>>();
+	public Map<UUID, List<Hologram>> existingHolograms = new HashMap<UUID, List<Hologram>>();
 	
 	public void handleZero(String message, Player p){
 		boolean requirePerm = plugin.getConfig().getBoolean("ConfigZero_Require_Permissions");
@@ -361,12 +362,12 @@ public class DecentHologramsImplementation {
 		}
 	}
 	
-	public int formatHologramLines(Player p, Hologram hologram, String message){
+	public int formatHologramLines(LivingEntity e, Hologram hologram, String message){
 		List<String> lineList = new ArrayList<String>();
 		for(String formatLine : plugin.getConfig().getStringList("ChatBubble_Message_Format")){
 			boolean addedToLine = false;
 			if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI"))
-				formatLine = placeholderShit.formatString(p, formatLine);
+				formatLine = placeholderShit.formatString(e, formatLine);
 			if(formatLine.contains("%chatbubble_message%")){
 				addedToLine = true;
 				formatLine = formatLine.replace("%chatbubble_message%", message);
@@ -406,7 +407,7 @@ public class DecentHologramsImplementation {
 						s = ChatBubbles.makeColors(s);
 						if(plugin.getConfig().getBoolean("ChatBubble_Strip_Formatting"))
 							s = ChatColor.stripColor(s);
-						s = placeholderShit.formatString(p, plugin.prefix + s + plugin.suffix);
+						s = placeholderShit.formatString(e, plugin.prefix + s + plugin.suffix);
 						s = ChatBubbles.makeColors(s);
 						lineList.add(s);
 					} else {
@@ -423,7 +424,7 @@ public class DecentHologramsImplementation {
 					formatLine = ChatBubbles.makeColors(formatLine);
 					if(plugin.getConfig().getBoolean("ChatBubble_Strip_Formatting"))
 						formatLine = ChatColor.stripColor(formatLine);
-					formatLine = placeholderShit.formatString(p, plugin.prefix + formatLine + plugin.suffix);
+					formatLine = placeholderShit.formatString(e, plugin.prefix + formatLine + plugin.suffix);
 					formatLine = ChatBubbles.makeColors(formatLine);
 					lineList.add(formatLine);
 				}	else {
