@@ -90,10 +90,12 @@ ChatBubble_Sound_Volume: 1.0
 Use_ChatBubble_Trait_Citizens: true
 #The trait won't load if citizens isn't loaded anyway, this just prevents unneeded
 #Code from running if you decide not to use this trait
+
 Citizens_Bubbles_Require_See_Permission: false
 #Enabling this requires players to have the permission to see a Citizens ChatBubble
 Citizens_Bubbles_See_Permission: "chatbubble.see"
 #The permission needed to see Citizens ChatBubbles
+
 ChatBubble_Overrides_NPC_Chat: false
 #Setting this to true cancels the chat from displaying in the normal player chat and
 #Shows only ChatBubbles over their heads, useful for lobbies or towns

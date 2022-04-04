@@ -340,9 +340,17 @@ public class HolographicDisplaysImplementation {
 				formatLine = placeholderShit.formatString(e, formatLine);
 			if(formatLine.contains("%chatbubble_message%")){
 				addedToLine = true;
-				formatLine = formatLine.replace("%chatbubble_message%", message);
+				message = ChatBubbles.makeColors(message);
+				if(plugin.getConfig().getBoolean("ChatBubble_Strip_Formatting"))
+					message = ChatColor.stripColor(message);
 				
-				for(String s : formatLine.split(" ")){
+				//-----
+				//----- Handle strings wrapping numerous lines -----
+				//-----
+				//To be completely honest, I coded up this disgusting monster at one point to functionality,
+				//but I no longer understand how it works at all. Is it overly repetitive? I have no clue.
+				//I was confident with it's functionality when I made it so I'm not touching it or thinking too hard.
+				for(String s : message.split(" ")){
 					if(s.length() > plugin.length){
 						String insert = "-\n";
 						int period = plugin.length - 1;
@@ -362,34 +370,30 @@ public class HolographicDisplaysImplementation {
 						        index += period;
 						    }
 						String replacement = builder.toString();
-						formatLine = formatLine.replace(s, replacement);
 						message = message.replace(s, replacement);
 					}
 				}
 				
-				StringBuilder sb = new StringBuilder(formatLine.replace(message, "") + message);
+				StringBuilder sb = new StringBuilder(formatLine.replace("%chatbubble_message%", message));
 				int i = 0;
 				while (i + plugin.length < sb.length() && (i = sb.lastIndexOf(" ", i + plugin.length)) != -1) {
 				    sb.replace(i, i + 1, "\n");
 				}
 				for(String s : sb.toString().split("\\n")){
 					if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-						s = ChatBubbles.makeColors(s);
-						if(plugin.getConfig().getBoolean("ChatBubble_Strip_Formatting"))
-							s = ChatColor.stripColor(s);
 						s = placeholderShit.formatString(e, plugin.prefix + s + plugin.suffix);
 						s = ChatBubbles.makeColors(s);
 						lineList.add(s);
 					} else {
-						s = ChatBubbles.makeColors(s);
-						if(plugin.getConfig().getBoolean("ChatBubble_Strip_Formatting"))
-							s = ChatColor.stripColor(s);
 						s = ChatBubbles.makeColors(plugin.prefix + s + plugin.suffix);
 						lineList.add(s);
 					}
 				}
+				// ^ Now text wraps lines. Tada.
 			}
 			if(!addedToLine) {
+				//If a message is to be implanted, formatting will already have happened.
+				//If no player message was formatted in on this line, then formatting must still happen.
 				if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
 					formatLine = ChatBubbles.makeColors(formatLine);
 					if(plugin.getConfig().getBoolean("ChatBubble_Strip_Formatting"))

@@ -12,7 +12,7 @@ import net.citizensnpcs.api.trait.Trait;
 
 public class ChatBubbleTrait extends Trait {
 	
-	ChatBubbles plugin = null;
+	public ChatBubbles plugin = null;
 	CitizensHDChatbubble hdHandler;
 	CitizensDHChatbubble dhHandler;
 	private boolean chatBubbleOverridesNPCChat = false;

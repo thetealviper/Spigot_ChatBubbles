@@ -62,6 +62,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 				Bukkit.getServer().getConsoleSender().sendMessage("[ChatBubbles] Citizens found and trait chatbubble enabled");
 				net.citizensnpcs.api.CitizensAPI.getTraitFactory().registerTrait(net.citizensnpcs.api.trait.TraitInfo.create(ChatBubbleTrait.class).withName("chatbubble"));
 				trait = new ChatBubbleTrait();
+				//trait.plugin = this; //Can't do it this way because constructor uses it and I don't know if adding args to constructor will break two lines up trait registration
 			}					
 		}
 	}
