@@ -12,6 +12,8 @@ public class ChatListenerPrototype {
 			return;
 		switch (plugin.getConfig().getInt("ChatBubble_Configuration_Mode")){
 		case 0:
+			//If player has manually toggled to disable the hologram functionality
+			if(!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
 			if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
 				e.setCancelled(true);
 			plugin.handleZero(e.getMessage(), e.getPlayer());
@@ -20,12 +22,16 @@ public class ChatListenerPrototype {
 			//This is handled in the command event
 			break;
 		case 2:
+			//If player has manually toggled to disable the hologram functionality
+			if(!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
 			if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
 				e.setCancelled(true);
 			plugin.handleTwo(e.getMessage(), e.getPlayer());
 			break;
 		case 3:
 			if(Bukkit.getServer().getPluginManager().getPlugin("Factions") != null) {
+				//If player has manually toggled to disable the hologram functionality
+				if(!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
 				if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
 					e.setCancelled(true);
 				plugin.handleThree(e.getMessage(), e.getPlayer());
@@ -34,16 +40,21 @@ public class ChatListenerPrototype {
 			}
 			break;
 		case 4:
+			//If player has manually toggled to disable the hologram functionality
+			if(!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
 			if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
 				e.setCancelled(true);
 			plugin.handleFour(e.getMessage(), e.getPlayer());
 			break;
 		case 5:
-			if(e.getMessage().startsWith(".")) {
+			String prefix = plugin.getConfig().getString("ConfigFive_Prefix_Characters");
+			if(e.getMessage().startsWith(prefix)) {
+				//If player has manually toggled to disable the hologram functionality
+				if(!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
 				if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
 					e.setCancelled(true);
 				else
-					e.setMessage(e.getMessage().substring(1)); //This is uniquely necessary to this config mode 5
+					e.setMessage(e.getMessage().substring(prefix.length())); //This is uniquely necessary to this config mode 5
 				plugin.handleFive(e.getMessage(), e.getPlayer());
 			}
 			break;

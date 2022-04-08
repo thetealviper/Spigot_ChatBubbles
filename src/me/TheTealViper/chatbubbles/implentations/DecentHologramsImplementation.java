@@ -237,8 +237,6 @@ public class DecentHologramsImplementation {
 		//if(sendOriginal && le instanceof Player) ((Player) le).chat(message); //Must be handled within ChatListenerPrototype bc infinite recursion
 		//If require perm and player does not have the required perm to create the hologram
 		if(requirePerm && !le.hasPermission(usePerm)) return;
-		//If player has manually toggled to disable the hologram functionality
-		if(!plugin.togglePF.getBoolean(le.getUniqueId().toString())) return;
 		//Override (delete) pre-existing holograms
 		if(existingHolograms.containsKey(le.getUniqueId())) {
 			for(Hologram h : existingHolograms.get(le.getUniqueId())) {

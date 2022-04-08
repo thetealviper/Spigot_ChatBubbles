@@ -29,8 +29,6 @@ public class HolographicDisplaysImplementation {
 		String seePerm = plugin.getConfig().getString("ConfigZero_See_Permission");
 		if(requirePerm && !p.hasPermission(usePerm))
 			return;
-		if(!plugin.togglePF.getBoolean(p.getUniqueId().toString()))
-			return;
 		if(existingHolograms.containsKey(p.getUniqueId())) {
 			for(Hologram h : existingHolograms.get(p.getUniqueId())) {
 				if(!h.isDeleted())
@@ -86,8 +84,6 @@ public class HolographicDisplaysImplementation {
 		String seePerm = plugin.getConfig().getString("ConfigOne_See_Permission");
 		if(requirePerm && !p.hasPermission(usePerm))
 			return;
-		if(!plugin.togglePF.getBoolean(p.getUniqueId().toString()))
-			return;
 		if(existingHolograms.containsKey(p.getUniqueId())) {
 			for(Hologram h : existingHolograms.get(p.getUniqueId())) {
 				if(!h.isDeleted())
@@ -140,8 +136,6 @@ public class HolographicDisplaysImplementation {
 	
 	public void handleTwo(String message, Player p){
 		boolean sendOriginal = plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message");
-		if(!plugin.togglePF.getBoolean(p.getUniqueId().toString()))
-			return;
 		if(existingHolograms.containsKey(p.getUniqueId())) {
 			for(Hologram h : existingHolograms.get(p.getUniqueId())) {
 				if(!h.isDeleted())
@@ -256,9 +250,6 @@ public class HolographicDisplaysImplementation {
 	}
 	
 	public void handleFour(String message, Player p){
-		if(!plugin.togglePF.getBoolean(p.getUniqueId().toString()))
-			return;
-		
 		if(plugin.getConfig().getBoolean("ChatBubble_Play_Sound")) {
 			String sound = plugin.getConfig().getString("ChatBubble_Sound_Name").toLowerCase();
 			float volume = (float) plugin.getConfig().getDouble("ChatBubble_Sound_Volume");
@@ -279,8 +270,6 @@ public class HolographicDisplaysImplementation {
 		String usePerm = plugin.getConfig().getString("ConfigFive_Use_Permission");
 		String seePerm = plugin.getConfig().getString("ConfigFive_See_Permission");
 		if(requirePerm && !p.hasPermission(usePerm))
-			return;
-		if(!plugin.togglePF.getBoolean(p.getUniqueId().toString()))
 			return;
 		if(existingHolograms.containsKey(p.getUniqueId())) {
 			for(Hologram h : existingHolograms.get(p.getUniqueId())) {
