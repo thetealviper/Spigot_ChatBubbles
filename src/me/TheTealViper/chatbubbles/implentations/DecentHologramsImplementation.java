@@ -67,8 +67,15 @@ public class DecentHologramsImplementation {
 				//I was confident with it's functionality when I made it so I'm not touching it or thinking too hard.
 				for(String s : message.split(" ")){
 					if(s.length() > plugin.length){
-						String insert = "-\n";
-						int period = plugin.length - 1;
+						String insert = null;
+						int period = -1;
+						if(plugin.getConfig().getBoolean("ChatBubble_WordWrap_Use_Hyphen")) {
+							insert = "-\n";
+							period = plugin.length - 1;
+						}else{
+							insert = "\n";
+							period = plugin.length;
+						}
 						StringBuilder builder = new StringBuilder(
 						         s.length() + insert.length() * (s.length()/plugin.length)+1);
 

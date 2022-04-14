@@ -44,6 +44,9 @@ ChatBubble_Message Suffix: ""
 
 ChatBubble_Maximum_Line_Length: 20
 #Want long, narrow bubbles or short, wide bubbles? This is how you change that
+ChatBubble_WordWrap_Use_Hyphen: true
+#If your native language is asian and doesn't follow the typical English standard
+#of wrapping lines with "-" at the end, then set this to false.
 
 ChatBubble_See_Own_Bubbles: true
 #Enabling this allows players to see their own bubbles
@@ -161,5 +164,5 @@ ConfigFive_Prefix_Characters:
 #                        Version                         #
 ##########################################################
 
-VERSION: 11
+VERSION: 12
 #Do not touch this. No touchy.
