@@ -42,12 +42,12 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 	private ChatBubbleTrait trait;
 	
 	public void onEnable(){
-		if(Bukkit.getServer().getPluginManager().getPlugin("HolographicDisplays") != null) {
-			foundHolographicDisplays = true;
-			HDI = new HolographicDisplaysImplementation();
-		}else if(Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
+		if(Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
 			foundDecentHolograms = true;
 			DHI = new DecentHologramsImplementation();
+		}else if(Bukkit.getServer().getPluginManager().getPlugin("HolographicDisplays") != null) {
+			foundHolographicDisplays = true;
+			HDI = new HolographicDisplaysImplementation();
 		}else {
 			getServer().getConsoleSender().sendMessage(ChatColor.RED + "ChatBubbles can't activate because you have neither HolographicDisplays nor DecentHolograms installed!!!");
 			return;

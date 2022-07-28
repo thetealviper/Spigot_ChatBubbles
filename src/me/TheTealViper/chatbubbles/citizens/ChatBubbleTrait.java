@@ -46,7 +46,10 @@ public class ChatBubbleTrait extends Trait {
 	    		if(plugin.foundHolographicDisplays) {
 	    			hdHandler.createBubbleHD(p, msg);
 	    		}else if(plugin.foundDecentHolograms) {
-	    			dhHandler.createBubbleDH(p, msg);
+	    			if(plugin.getConfig().contains("Citizens_Custom_Sounds") && plugin.getConfig().getConfigurationSection("Citizens_Custom_Sounds").getKeys(false).contains(talker.getId() + ""))
+	    				dhHandler.createBubbleDH(p, msg, plugin.getConfig().getString("Citizens_Custom_Sounds." + talker.getId()));
+	    			else
+	    				dhHandler.createBubbleDH(p, msg);
 	    		}
 	    		//create config options and set up
 	    		if(this.chatBubbleOverridesNPCChat)

@@ -392,8 +392,8 @@ public class HolographicDisplaysImplementation {
 				//If no player message was formatted in on this line, then formatting must still happen.
 				if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
 					formatLine = ChatBubbles.makeColors(formatLine);
-					if(plugin.getConfig().getBoolean("ChatBubble_Strip_Formatting"))
-						formatLine = ChatColor.stripColor(formatLine);
+//					if(plugin.getConfig().getBoolean("ChatBubble_Strip_Formatting"))
+//						formatLine = ChatColor.stripColor(formatLine);
 					formatLine = placeholderShit.formatString(e, plugin.prefix + formatLine + plugin.suffix);
 					formatLine = ChatBubbles.makeColors(formatLine);
 					lineList.add(formatLine);

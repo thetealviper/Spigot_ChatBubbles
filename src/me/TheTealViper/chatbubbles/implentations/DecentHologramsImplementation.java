@@ -118,8 +118,8 @@ public class DecentHologramsImplementation {
 				//If no player message was formatted in on this line, then formatting must still happen.
 				if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
 					formatLine = ChatBubbles.makeColors(formatLine);
-					if(plugin.getConfig().getBoolean("ChatBubble_Strip_Formatting"))
-						formatLine = ChatColor.stripColor(formatLine);
+//					if(plugin.getConfig().getBoolean("ChatBubble_Strip_Formatting"))
+//						formatLine = ChatColor.stripColor(formatLine);
 					formatLine = placeholderShit.formatString(e, plugin.prefix + formatLine + plugin.suffix);
 					formatLine = ChatBubbles.makeColors(formatLine);
 					lineList.add(formatLine);
@@ -143,6 +143,9 @@ public class DecentHologramsImplementation {
 	}
 	
 	public void handleHologram(String message, LivingEntity le, int configMode) {
+		handleHologram(message, le, configMode, "");
+	}
+	public void handleHologram(String message, LivingEntity le, int configMode, String soundOverride) {
 		//-----
 		//----- Declare Vars -----
 		//-----
@@ -255,7 +258,7 @@ public class DecentHologramsImplementation {
 		}
 		//Handle sound creation since every config mode potentially has sound
 		if(plugin.getConfig().getBoolean("ChatBubble_Play_Sound")) {
-			String sound = plugin.getConfig().getString("ChatBubble_Sound_Name").toLowerCase();
+			String sound = !soundOverride.equals("") ? soundOverride : plugin.getConfig().getString("ChatBubble_Sound_Name").toLowerCase();
 			float volume = (float) plugin.getConfig().getDouble("ChatBubble_Sound_Volume");
 			if(!sound.equals("")) {
 				try {
@@ -273,18 +276,19 @@ public class DecentHologramsImplementation {
 		//----- Create/Manage Hologram -----
 		//-----
 		//Create hologram and input into database
-		final Hologram hologram = DHAPI.createHologram(System.currentTimeMillis() + "", le.getLocation().add(0.0, plugin.bubbleOffset, 0.0));
+		final Hologram hologram = DHAPI.createHologram(System.currentTimeMillis() + le.getName() + "", le.getLocation().add(0.0, plugin.bubbleOffset, 0.0));
 		hologram.enable();
 		List<Hologram> hList = new ArrayList<Hologram>();
 		hList.add(hologram);
 		existingHolograms.put(le.getUniqueId(), hList);
 		//Hide hologram by default (exception for Citizens)
-		if (!citizensShowToAll) hologram.hideAll();
+		if (!citizensShowToAll)
+			hologram.hideAll();
 		//Config Mode 2 permGroup Error Check - If a blank string then player doesn't have one and shouldn't make a hologram in mode 2
 		if (permGroup != null && permGroup == "") return;
 		//Handle visibility logic
 		for(Player oP : Bukkit.getOnlinePlayers()){
-			if(((plugin.seeOwnBubble) || (!plugin.seeOwnBubble && oP.getName() != le.getName())) //Players can see their own bubble, or they can't but they are different players : Config Mode ALL
+			if(((plugin.seeOwnBubble) || (!plugin.seeOwnBubble && !oP.getName().equals(le.getName()))) //Players can see their own bubble, or they can't but they are different players : Config Mode ALL
 					&& (oP.getWorld().getName().equals(le.getWorld().getName()) //Players are in the same world : Config Mode ALL
 					&& (oP.getLocation().distance(le.getLocation()) <= plugin.distance)) //Players are within range of eachother : Config Mode ALL
 					&& (!requirePerm || (requirePerm && oP.hasPermission(seePerm))) //A requirement isn't required to see, or is and the player has it : Config Mode 0,1,5

@@ -13,7 +13,10 @@ public class CitizensDHChatbubble {
 	}
 	
 	public void createBubbleDH(LivingEntity le, String msg) {
-		plugin.DHI.handleHologram(msg, le, -1);
+		createBubbleDH(le, msg, "");
+	}
+	public void createBubbleDH(LivingEntity le, String msg, String soundOverride) {
+		plugin.DHI.handleHologram(msg, le, -1, soundOverride);
 	}
 }
     

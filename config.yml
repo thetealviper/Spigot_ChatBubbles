@@ -103,6 +103,21 @@ ChatBubble_Overrides_NPC_Chat: false
 #Setting this to true cancels the chat from displaying in the normal player chat and
 #Shows only ChatBubbles over their heads, useful for lobbies or towns
 
+#--
+#Citizens_Custom_Sounds:
+# 1: "minecraft:block.anvil.use"
+# 5: "minecraft:entity.guardian.hurt"
+#--
+#Uncomment the lines above between the dividers to enable this feature, configuring it
+#as necessary. The formatting is to stay with the indentations as is, however the actual
+#values and number of values can be changed. In the above example, npc with id 1 would
+#play the sound "BLOCK_ANVIL_USE" every message. Npc with id 5 would play "ENTITY_GUARDIAN_HURT".
+#Custom resource pack sounds can be used, though knowing what to type to access them is up to you
+#to know. You can test naming conventions with the vanilla command "/playsound" in game. Don't
+#uncomment "Citizens_Custom_Sounds:" and provide no custom npc sounds or this will break the
+#config and make it unloadable by spigot. You have been WARNED HERE. This feature only works
+with DecentHolograms, NOT HolographicDisplays. Support for HolographicDisplays is phasing out.
+
 ##############################
 #          0 Config          #
 ##############################
@@ -164,5 +179,5 @@ ConfigFive_Prefix_Characters:
 #                        Version                         #
 ##########################################################
 
-VERSION: 12
+VERSION: 13
 #Do not touch this. No touchy.
