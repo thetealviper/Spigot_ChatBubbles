@@ -21,6 +21,7 @@ import me.TheTealViper.chatbubbles.implentations.ChatListenerLOW;
 import me.TheTealViper.chatbubbles.implentations.ChatListenerLOWEST;
 import me.TheTealViper.chatbubbles.implentations.ChatListenerMONITOR;
 import me.TheTealViper.chatbubbles.implentations.ChatListenerNORMAL;
+import me.TheTealViper.chatbubbles.implentations.ChatListenerPrototype;
 import me.TheTealViper.chatbubbles.implentations.DecentHologramsImplementation;
 import me.TheTealViper.chatbubbles.implentations.HolographicDisplaysImplementation;
 import me.TheTealViper.chatbubbles.utils.EnableShit;
@@ -112,6 +113,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 			Bukkit.getPluginManager().registerEvents(new ChatListenerNORMAL(), this);
 			break;
 		}
+		ChatListenerPrototype.RegisterBlacklist(this);
 	}
 	
 	public void onDisable(){

@@ -67,6 +67,16 @@ ChatBubble_EventPriority: "NORMAL"
 # MONITOR
 # NORMAL
 
+ChatBubble_Enable_Filtering: true
+#Enabling this will filter the blacklisted words out of CHATBUBBLES ONLY.
+#If you wish you filter chat itself, then get a chat moderation plugin.
+#ChatBubbles is not responsible for filtering chat and this feature is
+# primarily intended to only be used to filter words from ChatBubbles that
+# are intentionally allowed in chat.
+ChatBubble_Filter_List:
+ - "butt"
+ - "stinky"
+
 ##############################
 #        Sound Config        #
 ##############################
@@ -116,7 +126,7 @@ ChatBubble_Overrides_NPC_Chat: false
 #to know. You can test naming conventions with the vanilla command "/playsound" in game. Don't
 #uncomment "Citizens_Custom_Sounds:" and provide no custom npc sounds or this will break the
 #config and make it unloadable by spigot. You have been WARNED HERE. This feature only works
-with DecentHolograms, NOT HolographicDisplays. Support for HolographicDisplays is phasing out.
+#with DecentHolograms, NOT HolographicDisplays. Support for HolographicDisplays is phasing out.
 
 ##############################
 #          0 Config          #
@@ -179,5 +189,5 @@ ConfigFive_Prefix_Characters:
 #                        Version                         #
 ##########################################################
 
-VERSION: 13
+VERSION: 14
 #Do not touch this. No touchy.

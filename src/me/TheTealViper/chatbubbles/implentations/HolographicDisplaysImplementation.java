@@ -19,6 +19,7 @@ import me.TheTealViper.chatbubbles.ChatBubbles;
 import me.TheTealViper.chatbubbles.placeholderShit;
 import net.md_5.bungee.api.ChatColor;
 
+@SuppressWarnings("deprecation")
 public class HolographicDisplaysImplementation {
 	public static ChatBubbles plugin;
 	public Map<UUID, List<Hologram>> existingHolograms = new HashMap<UUID, List<Hologram>>();
