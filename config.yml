@@ -76,6 +76,10 @@ ChatBubble_Enable_Filtering: true
 ChatBubble_Filter_List:
  - "butt"
  - "stinky"
+#The only special characters manually programmed to function properly here are:
+# '[', ']', '(', and ')'
+#Use all others at your own risk. If there is another you believe to be important,
+# message me and try to make your case.
 
 ##############################
 #        Sound Config        #

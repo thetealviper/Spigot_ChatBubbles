@@ -20,10 +20,12 @@ public class RegexpGenerator {
       if (chars.equals(" ")) {
         String reg = "(%SPACE%+)+(\\W|_)*";
         stringBuilder.append(reg);
-      } 
-      if (chars.equals("#")) {
+      } else if (chars.equals("#")) {
         String reg = "#";
         stringBuilder.append(reg);
+      } else if (chars.equals("[") || chars.equals("]") || chars.equals("(") || chars.equals(")")) {
+    	  String reg = "(\\" + chars + ")+(\\W|_)*";
+    	  stringBuilder.append(reg);
       } else {
 		if (!(i == s.length() - 1 && lastChars.equals(chars))) { //If last letter is repeated, don't include twice (ex. butt should be considered but or else checks into next word typed so 'butt test' breaks)
 		  String reg = "(" + c + ")+(\\W|_)*";
@@ -36,7 +38,7 @@ public class RegexpGenerator {
       }
       lastChars = chars;
     } 
-    String regexString = toLeetSpeak(stringBuilder.toString().replaceAll("\\[|\\]|\\s", "").replaceAll("%SPACE%", " "));
+    String regexString = toLeetSpeak(stringBuilder.toString().replaceAll("\\s", "").replaceAll("%SPACE%", " "));
     if (!regexString.contains("#")) {
       regexString = "(" + regexString + ")";
     } else if (regexString.startsWith("#") && regexString.endsWith("#")) {
