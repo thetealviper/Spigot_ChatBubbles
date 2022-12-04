@@ -131,7 +131,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 			if(label.equalsIgnoreCase("chatbubble") || label.equalsIgnoreCase("cb")){
 				if(args.length == 0){
 					return false;
-				}else{
+				} else {
 					String message = "";
 					for(int i = 0;i < args.length;i++)
 						if(i == args.length - 1)
@@ -139,12 +139,17 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 						else
 							message += args[i] + " ";
 					handleOne(message, p);
+					//Handle /cb reload confusion warning
+					if (message.equalsIgnoreCase("reload")) {
+						p.sendMessage("ChatBubbles Warning: '/cb <msg>' sends a message. If you meant to reload, type /cbreload");
+					}
 				}
 			}
 			if((label.equalsIgnoreCase("chatbubblereload") || label.equalsIgnoreCase("cbreload")) && p.hasPermission("chatbubbles.reload")){
 				reloadConfig();
 				initVars();
-				p.sendMessage("Reloaded Successfully");
+				p.sendMessage("Reloaded ChatBubbles Successfully");
+				getServer().getConsoleSender().sendMessage("Reloaded ChatBubbles Successfully");
 			}
 			if((label.equalsIgnoreCase("chatbubbletoggle") || label.equalsIgnoreCase("cbtoggle") || label.equalsIgnoreCase("cbt")) && p.hasPermission("chatbubbles.toggle")) {
 				boolean currentState = togglePF.getBoolean(p.getUniqueId().toString());
@@ -154,6 +159,15 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 					p.sendMessage("ChatBubbles toggled on!");
 				togglePF.set(p.getUniqueId().toString(), !currentState);
 				togglePF.save();
+			}
+		} else {
+			if(label.equalsIgnoreCase("chatbubble") || label.equalsIgnoreCase("cb")){
+				sender.sendMessage("/cbreload - Reloads ChatBubbles.");
+			}
+			if((label.equalsIgnoreCase("chatbubblereload") || label.equalsIgnoreCase("cbreload"))){
+				reloadConfig();
+				initVars();
+				sender.sendMessage("Reloaded ChatBubbles Successfully");
 			}
 		}
 		return false;

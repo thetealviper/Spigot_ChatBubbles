@@ -26,9 +26,16 @@ public class ChatListenerPrototype {
 	public static void onChat(ChatBubbles plugin, AsyncPlayerChatEvent e) {
 		if(e.isCancelled() || e.getPlayer().getGameMode().name().equals(GameMode.SPECTATOR.name()))
 			return;
+		//Handle message overrides
 		String messageOverride = e.getMessage();
 		if (plugin.getConfig().getBoolean("ChatBubble_Enable_Filtering"))
 			messageOverride = replaceBlacklist(e.getMessage());
+		if (plugin.getConfig().contains("ChatBubble_Length_Limit") && plugin.getConfig().getInt("ChatBubble_Length_Limit") > 0 && messageOverride.length() > plugin.getConfig().getInt("ChatBubble_Length_Limit")) {
+			messageOverride = messageOverride.substring(0, plugin.getConfig().getInt("ChatBubble_Length_Limit")) + plugin.getConfig().getString("ChatBubble_Length_Suffix");
+		}
+		if (messageOverride.length() == 0)
+			return;
+		//Handle message
 		switch (plugin.getConfig().getInt("ChatBubble_Configuration_Mode")){
 		case 0:
 			//If player has manually toggled to disable the hologram functionality

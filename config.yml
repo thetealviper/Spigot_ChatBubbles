@@ -81,6 +81,11 @@ ChatBubble_Filter_List:
 #Use all others at your own risk. If there is another you believe to be important,
 # message me and try to make your case.
 
+ChatBubble_Length_Limit: 0
+#Setting this value to any number greater than 0 will limit the total chatbubble length.
+ChatBubble_Length_Suffix: "..."
+#This will be added to the end of messages which have been cut short.
+
 ##############################
 #        Sound Config        #
 ##############################
@@ -193,5 +198,5 @@ ConfigFive_Prefix_Characters:
 #                        Version                         #
 ##########################################################
 
-VERSION: 14
+VERSION: 15
 #Do not touch this. No touchy.
