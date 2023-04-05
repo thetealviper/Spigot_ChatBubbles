@@ -14,7 +14,7 @@ import me.TheTealViper.chatbubbles.thirdparty.RegexpGenerator;
 
 public class ChatListenerPrototype {
 	private static List<Pattern> BlacklistRegexList = new ArrayList<Pattern>();
-	
+
 	public static void RegisterBlacklist (ChatBubbles plugin) {
 		RegexpGenerator RG = new RegexpGenerator();
 		for (String word : plugin.getConfig().getStringList("ChatBubble_Filter_List")) {
@@ -22,7 +22,7 @@ public class ChatListenerPrototype {
 			BlacklistRegexList.add(Pattern.compile(regexStr));
 		}
 	}
-	
+
 	public static void onChat(ChatBubbles plugin, AsyncPlayerChatEvent e) {
 		if(e.isCancelled() || e.getPlayer().getGameMode().name().equals(GameMode.SPECTATOR.name()))
 			return;
@@ -37,84 +37,105 @@ public class ChatListenerPrototype {
 			return;
 		//Handle message
 		switch (plugin.getConfig().getInt("ChatBubble_Configuration_Mode")){
-		case 0:
-			//If player has manually toggled to disable the hologram functionality
-			if(!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
-			if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
-				e.setCancelled(true);
-			plugin.handleZero(messageOverride, e.getPlayer());
-			break;
-		case 1:
-			//This is handled in the command event
-			break;
-		case 2:
-			//If player has manually toggled to disable the hologram functionality
-			if(!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
-			if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
-				e.setCancelled(true);
-			plugin.handleTwo(messageOverride, e.getPlayer());
-			break;
-		case 3:
-			if(Bukkit.getServer().getPluginManager().getPlugin("Factions") != null) {
+			case 0:
 				//If player has manually toggled to disable the hologram functionality
 				if(!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
 				if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
 					e.setCancelled(true);
-				plugin.handleThree(messageOverride, e.getPlayer());
-			}else{
-				plugin.getServer().getConsoleSender().sendMessage("ChatBubbles is set to configuration mode 3 but Factions can't be found!");
-			}
-			break;
-		case 4:
-			//If player has manually toggled to disable the hologram functionality
-			if(!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
-			if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
-				e.setCancelled(true);
-			plugin.handleFour(messageOverride, e.getPlayer());
-			break;
-		case 5:
-			// Find out if message starts with config.yml prefixes, and if so which one
-			List<String> prefixes = plugin.getConfig().getStringList("ConfigFive_Prefix_Characters");
-			String foundPrefix = "";
-			for(String prefix : prefixes) {
-				if(!foundPrefix.equals("")) continue;
-				if(messageOverride.startsWith(prefix)) {
-					foundPrefix = prefix;
+				plugin.handleZero(messageOverride, e.getPlayer());
+				break;
+			case 1:
+				//This is handled in the command event
+				break;
+			case 2:
+				//If player has manually toggled to disable the hologram functionality
+				if(!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
+				if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
+					e.setCancelled(true);
+				plugin.handleTwo(messageOverride, e.getPlayer());
+				break;
+			case 3:
+				if(Bukkit.getServer().getPluginManager().getPlugin("Factions") != null) {
+					//If player has manually toggled to disable the hologram functionality
+					if(!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
+					if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
+						e.setCancelled(true);
+					plugin.handleThree(messageOverride, e.getPlayer());
+				}else{
+					plugin.getServer().getConsoleSender().sendMessage("ChatBubbles is set to configuration mode 3 but Factions can't be found!");
 				}
-			}
-			//If message starts with a prefix
-			if(!foundPrefix.equals("")) {
+				break;
+			case 4:
 				//If player has manually toggled to disable the hologram functionality
 				if(!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
 				if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
 					e.setCancelled(true);
-				e.setMessage(e.getMessage().substring(foundPrefix.length())); //This is uniquely necessary to this config mode 5
-				messageOverride = messageOverride.substring(foundPrefix.length());
-				plugin.handleFive(messageOverride, e.getPlayer());
-			}
-			break;
-		default:
-			break;
+				plugin.handleFour(messageOverride, e.getPlayer());
+				break;
+			case 5:
+				// Find out if message starts with config.yml prefixes, and if so which one
+				List<String> prefixes = plugin.getConfig().getStringList("ConfigFive_Prefix_Characters");
+				String foundPrefix = "";
+				for(String prefix : prefixes) {
+					if(!foundPrefix.equals("")) continue;
+					if(messageOverride.startsWith(prefix)) {
+						foundPrefix = prefix;
+					}
+				}
+				//If message starts with a prefix
+				if(!foundPrefix.equals("")) {
+					//If player has manually toggled to disable the hologram functionality
+					if(!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
+					if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
+						e.setCancelled(true);
+					e.setMessage(e.getMessage().substring(foundPrefix.length())); //This is uniquely necessary to this config mode 5
+					messageOverride = messageOverride.substring(foundPrefix.length());
+					plugin.handleFive(messageOverride, e.getPlayer());
+				}
+				break;
+			case 6:
+				List<String> prefixList = plugin.getConfig().getStringList("ConfigSix_Prefix_Characters");
+				// Check if message is prefixed to not be in ChatBubble
+				String prefix = "";
+				for(String pref : prefixList) {
+					if(!prefix.equals("")) continue;
+					if(messageOverride.startsWith(pref)) {
+						prefix = pref;
+					}
+				}
+				// If the message wasn't prefixed to be ignored, send the ChatBubble
+				if(prefix.equals("")) {
+					//If player has manually toggled to disable the hologram functionality
+					if (!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
+					if (!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
+						e.setCancelled(true);
+					e.setMessage(e.getMessage().substring(prefix.length())); //This is necessary to remove prefix from message in chat
+					messageOverride = messageOverride.substring(prefix.length());
+					plugin.handleSix(messageOverride, e.getPlayer());
+				}
+				break;
+			default:
+				break;
 		}
 	}
-	
-	
-	
+
+
+
 	public static String replaceBlacklist (String message) {
 		String lowercaseString = message.toLowerCase();
 		String modifiedString = "";
 		int checkpointIndex = 0;
 		for (Pattern p : BlacklistRegexList) {
 			Matcher m = p.matcher(lowercaseString);
-	        while (m.find()) {
-	        	int findStart = m.start();
-	        	int findEnd = m.end();
-	        	modifiedString += message.substring(checkpointIndex, findStart);
-	        	checkpointIndex = findEnd;
-	        }
+			while (m.find()) {
+				int findStart = m.start();
+				int findEnd = m.end();
+				modifiedString += message.substring(checkpointIndex, findStart);
+				checkpointIndex = findEnd;
+			}
 		}
 		modifiedString += message.substring(checkpointIndex, message.length());
 		return modifiedString;
 	}
-	
+
 }

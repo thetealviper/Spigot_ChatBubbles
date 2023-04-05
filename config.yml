@@ -9,6 +9,7 @@ ChatBubble_Configuration_Mode: 0
 #3 - Every chat message is visible as a ChatBubble to players in the same Faction
 #4 - Every chat message appears only in text chat like vanilla but still allows a noise to be played
 #5 - Messages starting with ".<message>" become a ChatBubble. Like #1 but quicker.
+#6 - Every message becomes a ChatBubble except for messages starting with "!<message>"
 
 ##############################
 #      Universal Config      #
@@ -152,7 +153,7 @@ ConfigZero_See_Permission: "chatbubble.see"
 #          1 Config          #
 ##############################
 
-#This configuration mode uses "ChatBubble_Send_Original_Message" found in the 
+#This configuration mode uses "ChatBubble_Send_Original_Message" found in the
 #"Universal Config" to determine whether ChatBubble messages also get sent in chat
 
 ConfigOne_Require_Permissions: true
@@ -176,7 +177,7 @@ ConfigTwo_Permission_Groups:
 #          5 Config          #
 ##############################
 
-#This configuration mode uses "ChatBubble_Send_Original_Message" found in the 
+#This configuration mode uses "ChatBubble_Send_Original_Message" found in the
 #"Universal Config" to determine whether ChatBubble messages also get sent in chat
 
 ConfigFive_Require_Permissions: true
@@ -186,9 +187,24 @@ ConfigFive_Use_Permission: "chatbubble.use"
 ConfigFive_See_Permission: "chatbubble.see"
 #This is the permission necessary to see a ChatBubble
 
-ConfigFive_Prefix_Characters: 
+ConfigFive_Prefix_Characters:
  - "."
  - "。"
+
+##############################
+#          6 Config          #
+##############################
+
+ConfigSix_Require_Permissions: true
+#Enabling this requires players to have the permission to get a ChatBubble
+ConfigSix_Use_Permission: "chatbubble.use"
+#This is the permission necessary to get a ChatBubble
+ConfigSix_See_Permission: "chatbubble.see"
+#This is the permission necessary to see a ChatBubble
+
+ConfigSix_Prefix_Characters:
+ - "!"
+
 #This is the character which if ANY message starts with will be turned into a chatbubble.
 #Can be multiple characters long, but was never intended to be used that way.
 #Technically can be used as ANY custom command if set to "/cb" for example but definitely

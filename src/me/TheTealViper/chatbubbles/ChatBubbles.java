@@ -41,7 +41,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 	public DecentHologramsImplementation DHI;
 	public static EventPriority eventPriority;
 	private ChatBubbleTrait trait;
-	
+
 	public void onEnable(){
 		if(Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
 			foundDecentHolograms = true;
@@ -64,10 +64,10 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 				net.citizensnpcs.api.CitizensAPI.getTraitFactory().registerTrait(net.citizensnpcs.api.trait.TraitInfo.create(ChatBubbleTrait.class).withName("chatbubble"));
 				trait = new ChatBubbleTrait();
 				//trait.plugin = this; //Can't do it this way because constructor uses it and I don't know if adding args to constructor will break two lines up trait registration
-			}					
+			}
 		}
 	}
-	
+
 	private void initVars() {
 		life = getConfig().getInt("ChatBubble_Life");
 		distance = getConfig().getInt("ChatBubble_Viewing_Distance");
@@ -82,40 +82,40 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 		bubbleOffset = getConfig().getDouble("ChatBubble_Height_Offset");
 		useTrait = getConfig().getBoolean("Use_ChatBubble_Trait_Citizens");
 		switch(getConfig().getString("ChatBubble_EventPriority").toUpperCase()) {
-		case "HIGH":
-			eventPriority = EventPriority.HIGH;
-			ChatListenerHIGH.plugin = this;
-			Bukkit.getPluginManager().registerEvents(new ChatListenerHIGH(), this);
-			break;
-		case "HIGHEST":
-			eventPriority = EventPriority.HIGHEST;
-			ChatListenerHIGHEST.plugin = this;
-			Bukkit.getPluginManager().registerEvents(new ChatListenerHIGHEST(), this);
-			break;
-		case "LOW":
-			eventPriority = EventPriority.LOW;
-			ChatListenerLOW.plugin = this;
-			Bukkit.getPluginManager().registerEvents(new ChatListenerLOW(), this);
-			break;
-		case "LOWEST":
-			eventPriority = EventPriority.LOWEST;
-			ChatListenerLOWEST.plugin = this;
-			Bukkit.getPluginManager().registerEvents(new ChatListenerLOWEST(), this);
-			break;
-		case "MONITOR":
-			eventPriority = EventPriority.MONITOR;
-			ChatListenerMONITOR.plugin = this;
-			Bukkit.getPluginManager().registerEvents(new ChatListenerMONITOR(), this);
-			break;
-		case "NORMAL":
-			eventPriority = EventPriority.NORMAL;
-			ChatListenerNORMAL.plugin = this;
-			Bukkit.getPluginManager().registerEvents(new ChatListenerNORMAL(), this);
-			break;
+			case "HIGH":
+				eventPriority = EventPriority.HIGH;
+				ChatListenerHIGH.plugin = this;
+				Bukkit.getPluginManager().registerEvents(new ChatListenerHIGH(), this);
+				break;
+			case "HIGHEST":
+				eventPriority = EventPriority.HIGHEST;
+				ChatListenerHIGHEST.plugin = this;
+				Bukkit.getPluginManager().registerEvents(new ChatListenerHIGHEST(), this);
+				break;
+			case "LOW":
+				eventPriority = EventPriority.LOW;
+				ChatListenerLOW.plugin = this;
+				Bukkit.getPluginManager().registerEvents(new ChatListenerLOW(), this);
+				break;
+			case "LOWEST":
+				eventPriority = EventPriority.LOWEST;
+				ChatListenerLOWEST.plugin = this;
+				Bukkit.getPluginManager().registerEvents(new ChatListenerLOWEST(), this);
+				break;
+			case "MONITOR":
+				eventPriority = EventPriority.MONITOR;
+				ChatListenerMONITOR.plugin = this;
+				Bukkit.getPluginManager().registerEvents(new ChatListenerMONITOR(), this);
+				break;
+			case "NORMAL":
+				eventPriority = EventPriority.NORMAL;
+				ChatListenerNORMAL.plugin = this;
+				Bukkit.getPluginManager().registerEvents(new ChatListenerNORMAL(), this);
+				break;
 		}
 		ChatListenerPrototype.RegisterBlacklist(this);
 	}
-	
+
 	public void onDisable(){
 		if(getServer().getPluginManager().getPlugin("Citizens") != null) {
 			if(getServer().getPluginManager().getPlugin("Citizens").isEnabled() && this.useTrait) {
@@ -124,7 +124,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 		}
 		getServer().getConsoleSender().sendMessage(makeColors("ChatBubbles from TheTealViper shutting down. Bshzzzzzz"));
 	}
-	
+
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		if(sender instanceof Player) {
 			Player p = (Player) sender;
@@ -172,12 +172,12 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 		}
 		return false;
 	}
-	
+
 //	@EventHandler
 //	public void onChat(com.palmergames.bukkit.TownyChat.events.AsyncChatHookEvent e) {
 //		e.getChannel().
 //	}
-	
+
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
@@ -186,7 +186,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 			togglePF.save();
 		}
 	}
-	
+
 	@EventHandler
 	public void onQuit(PlayerQuitEvent e){
 		if(foundHolographicDisplays)
@@ -194,7 +194,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 		else if(foundDecentHolograms)
 			DHI.onQuit(e.getPlayer().getUniqueId());
 	}
-	
+
 	public void handleZero(String message, Player p){
 		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
 			if(foundHolographicDisplays)
@@ -203,7 +203,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 				DHI.handleZero(message, p);
 		}}, 0);
 	}
-	
+
 	public void handleOne(String message, Player p){
 		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
 			if(foundHolographicDisplays)
@@ -212,7 +212,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 				DHI.handleOne(message, p);
 		}}, 0);
 	}
-	
+
 	public void handleTwo(String message, Player p){
 		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
 			if(foundHolographicDisplays)
@@ -221,7 +221,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 				DHI.handleTwo(message, p);
 		}}, 0);
 	}
-	
+
 	public void handleThree(String message, Player p){
 		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
 			if(foundHolographicDisplays)
@@ -230,7 +230,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 				DHI.handleThree(message, p);
 		}}, 0);
 	}
-	
+
 	public void handleFour(String message, Player p){
 		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
 			if(foundHolographicDisplays)
@@ -239,7 +239,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 				DHI.handleFour(message, p);
 		}}, 0);
 	}
-	
+
 	public void handleFive(String message, Player p){
 		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
 			if(foundHolographicDisplays)
@@ -248,9 +248,18 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 				DHI.handleFive(message, p);
 		}}, 0);
 	}
-	
+
+	public void handleSix(String message, Player p){
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
+			if(foundHolographicDisplays)
+				HDI.handleSix(message, p);
+			else if(foundDecentHolograms)
+				DHI.handleSix(message, p);
+		}}, 0);
+	}
+
 //------------------------Utilities--------------------------------
-	
+
 	public final static Pattern HEXPAT = Pattern.compile("&#[a-fA-F0-9]{6}");
 	public static String makeColors(String s){
 		//Handle standard basic colors
@@ -277,13 +286,13 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 		while(s.contains("&o"))s = s.replace("&o", ChatColor.ITALIC + "");
 		while(s.contains("&r"))s = s.replace("&r", ChatColor.RESET + "");
 		//Handle custom hex codes (1.16 and up)
-        Matcher match = HEXPAT.matcher(s);
-        while(match.find()) {
-        	String color = s.substring(match.start(), match.end());
-        	s = s.replace(color, ChatColor.of(color.replace("&", "")) + "");
-        }
-        
+		Matcher match = HEXPAT.matcher(s);
+		while(match.find()) {
+			String color = s.substring(match.start(), match.end());
+			s = s.replace(color, ChatColor.of(color.replace("&", "")) + "");
+		}
+
 		return s;
 	}
-	
+
 }

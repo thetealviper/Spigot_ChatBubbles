@@ -22,31 +22,31 @@ import net.md_5.bungee.api.ChatColor;
 public class DecentHologramsImplementation {
 	public static ChatBubbles plugin;
 	public Map<UUID, List<Hologram>> existingHolograms = new HashMap<UUID, List<Hologram>>();
-	
+
 	public void handleZero(String message, Player p){
 		handleHologram(message, p, 0);
 	}
-	
+
 	public void handleOne(String message, Player p){
 		handleHologram(message, p, 1);
 	}
-	
+
 	public void handleTwo(String message, Player p){
 		handleHologram(message, p, 2);
 	}
-	
+
 	public void handleThree(String message, Player p){
 		handleHologram(message, p, 3);
 	}
-	
+
 	public void handleFour(String message, Player p){
 		handleHologram(message, p, 4);
 	}
-	
-	public void handleFive(String message, Player p){
-		handleHologram(message, p, 5);
-	}
-	
+
+	public void handleFive(String message, Player p){ handleHologram(message, p, 5); }
+
+	public void handleSix(String message, Player p){ handleHologram(message, p, 6); }
+
 	public int formatHologramLines(LivingEntity e, Hologram hologram, String message){
 		List<String> lineList = new ArrayList<String>();
 		for(String formatLine : plugin.getConfig().getStringList("ChatBubble_Message_Format")){
@@ -58,7 +58,7 @@ public class DecentHologramsImplementation {
 				message = ChatBubbles.makeColors(message);
 				if(plugin.getConfig().getBoolean("ChatBubble_Strip_Formatting"))
 					message = ChatColor.stripColor(message);
-				
+
 				//-----
 				//----- Handle strings wrapping numerous lines -----
 				//-----
@@ -77,29 +77,29 @@ public class DecentHologramsImplementation {
 							period = plugin.length;
 						}
 						StringBuilder builder = new StringBuilder(
-						         s.length() + insert.length() * (s.length()/plugin.length)+1);
+								s.length() + insert.length() * (s.length()/plugin.length)+1);
 
-						    int index = 0;
-						    String prefix = "";
-						    while (index < s.length())
-						    {
-						        // Don't put the insert in the very first iteration.
-						        // This is easier than appending it *after* each substring
-						        builder.append(prefix);
-						        prefix = insert;
-						        builder.append(s.substring(index, 
-						            Math.min(index + period, s.length())));
-						        index += period;
-						    }
+						int index = 0;
+						String prefix = "";
+						while (index < s.length())
+						{
+							// Don't put the insert in the very first iteration.
+							// This is easier than appending it *after* each substring
+							builder.append(prefix);
+							prefix = insert;
+							builder.append(s.substring(index,
+									Math.min(index + period, s.length())));
+							index += period;
+						}
 						String replacement = builder.toString();
 						message = message.replace(s, replacement);
 					}
 				}
-				
+
 				StringBuilder sb = new StringBuilder(formatLine.replace("%chatbubble_message%", message));
 				int i = 0;
 				while (i + plugin.length < sb.length() && (i = sb.lastIndexOf(" ", i + plugin.length)) != -1) {
-				    sb.replace(i, i + 1, "\n");
+					sb.replace(i, i + 1, "\n");
 				}
 				for(String s : sb.toString().split("\\n")){
 					if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
@@ -137,11 +137,11 @@ public class DecentHologramsImplementation {
 		//	hologram.appendTextLine(s);
 		return lineList.size();
 	}
-	
+
 	public void onQuit(UUID uuid) {
 		existingHolograms.remove(uuid);
 	}
-	
+
 	public void handleHologram(String message, LivingEntity le, int configMode) {
 		handleHologram(message, le, configMode, "");
 	}
@@ -151,95 +151,104 @@ public class DecentHologramsImplementation {
 		//-----
 		boolean /*sendOriginal = false,*/ isSoundOnly = false, requirePerm = false, citizensShowToAll = false;
 		String permGroup = null, usePerm = null, seePerm = null, factionName = null;
-		
+
 		//-----
 		//----- Initialize Vars -----
 		//-----
 		switch (configMode) {
-		case -1:
-			//This case is for Citizens NPCs
-			//sendOriginal = false; //Setting this false here prevents a potential double message because the NPC chat event isn't cancelled unlike the players'
-			isSoundOnly = false; //Only true for configMode = 4
-			requirePerm = false;
-			citizensShowToAll = true; //Only applicable for configMode = -1
-			permGroup = null; //Only applicable for configMode = 2
-			usePerm = null;
-			seePerm = null;
-			factionName = null; //Only applicable for configMode = 3
-			break;
-		case 0:
-			//sendOriginal = plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message"); //Must be handled within ChatListenerPrototype bc infinite recursion
-			isSoundOnly = false; //Only true for configMode = 4
-			requirePerm = plugin.getConfig().getBoolean("ConfigZero_Require_Permissions");
-			citizensShowToAll = false; //Only applicable for configMode = -1
-			permGroup = null; //Only applicable for configMode = 2
-			usePerm = plugin.getConfig().getString("ConfigZero_Use_Permission");
-			seePerm = plugin.getConfig().getString("ConfigZero_See_Permission");
-			factionName = null; //Only applicable for configMode = 3
-			break;
-		case 1:
-			//sendOriginal = plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message"); //Must be handled within ChatListenerPrototype bc infinite recursion
-			isSoundOnly = false; //Only true for configMode = 4
-			requirePerm = plugin.getConfig().getBoolean("ConfigOne_Require_Permissions");
-			citizensShowToAll = false; //Only applicable for configMode = -1
-			permGroup = null; //Only applicable for configMode = 2
-			usePerm = plugin.getConfig().getString("ConfigOne_Use_Permission");
-			seePerm = plugin.getConfig().getString("ConfigOne_See_Permission");
-			factionName = null; //Only applicable for configMode = 3
-			break;
-		case 2:
-			//sendOriginal = plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message"); //Must be handled within ChatListenerPrototype bc infinite recursion
-			isSoundOnly = false; //Only true for configMode = 4
-			requirePerm = false; //Permission group overrides this
-			citizensShowToAll = false; //Only applicable for configMode = -1
-			permGroup = ""; //null means this is skipped, "" means error & return without creating hologram
-			usePerm = null;
-			seePerm = null;
-			factionName = null; //Only applicable for configMode = 3
-			break;
-		case 3:
-			//sendOriginal = plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message"); //Must be handled within ChatListenerPrototype bc infinite recursion
-			isSoundOnly = false; //Only true for configMode = 4
-			requirePerm = false;
-			citizensShowToAll = false; //Only applicable for configMode = -1
-			permGroup = null; //Only applicable for configMode = 2
-			usePerm = null;
-			seePerm = null;
-			factionName = ""; //null means this is skipped, "" means error & return without creating hologram
-			break;
-		case 4:
-			//sendOriginal = plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message"); //Must be handled within ChatListenerPrototype bc infinite recursion
-			isSoundOnly = true; //Only true for configMode = 4
-			requirePerm = false;
-			citizensShowToAll = false; //Only applicable for configMode = -1
-			permGroup = null; //Only applicable for configMode = 2
-			usePerm = null;
-			seePerm = null;
-			factionName = null; //Only applicable for configMode = 3
-			break;
-		case 5:
-			//sendOriginal = plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message"); //Must be handled within ChatListenerPrototype bc infinite recursion
-			isSoundOnly = false; //Only true for configMode = 4
-			requirePerm = plugin.getConfig().getBoolean("ConfigFive_Require_Permissions");
-			citizensShowToAll = false; //Only applicable for configMode = -1
-			permGroup = null; //Only applicable for configMode = 2
-			usePerm = plugin.getConfig().getString("ConfigFive_Use_Permission");
-			seePerm = plugin.getConfig().getString("ConfigFive_See_Permission");
-			factionName = null; //Only applicable for configMode = 3
-			break;
-		default:
-			//Copy of case 0
-			//sendOriginal = plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message"); //Must be handled within ChatListenerPrototype bc infinite recursion
-			isSoundOnly = false; //Only true for configMode = 4
-			requirePerm = plugin.getConfig().getBoolean("ConfigZero_Require_Permissions");
-			citizensShowToAll = false; //Only applicable for configMode = -1
-			permGroup = null; //Only applicable for configMode = 2
-			usePerm = plugin.getConfig().getString("ConfigZero_Use_Permission");
-			seePerm = plugin.getConfig().getString("ConfigZero_See_Permission");
-			factionName = null; //Only applicable for configMode = 3
-			break;
+			case -1:
+				//This case is for Citizens NPCs
+				//sendOriginal = false; //Setting this false here prevents a potential double message because the NPC chat event isn't cancelled unlike the players'
+				isSoundOnly = false; //Only true for configMode = 4
+				requirePerm = false;
+				citizensShowToAll = true; //Only applicable for configMode = -1
+				permGroup = null; //Only applicable for configMode = 2
+				usePerm = null;
+				seePerm = null;
+				factionName = null; //Only applicable for configMode = 3
+				break;
+			case 0:
+				//sendOriginal = plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message"); //Must be handled within ChatListenerPrototype bc infinite recursion
+				isSoundOnly = false; //Only true for configMode = 4
+				requirePerm = plugin.getConfig().getBoolean("ConfigZero_Require_Permissions");
+				citizensShowToAll = false; //Only applicable for configMode = -1
+				permGroup = null; //Only applicable for configMode = 2
+				usePerm = plugin.getConfig().getString("ConfigZero_Use_Permission");
+				seePerm = plugin.getConfig().getString("ConfigZero_See_Permission");
+				factionName = null; //Only applicable for configMode = 3
+				break;
+			case 1:
+				//sendOriginal = plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message"); //Must be handled within ChatListenerPrototype bc infinite recursion
+				isSoundOnly = false; //Only true for configMode = 4
+				requirePerm = plugin.getConfig().getBoolean("ConfigOne_Require_Permissions");
+				citizensShowToAll = false; //Only applicable for configMode = -1
+				permGroup = null; //Only applicable for configMode = 2
+				usePerm = plugin.getConfig().getString("ConfigOne_Use_Permission");
+				seePerm = plugin.getConfig().getString("ConfigOne_See_Permission");
+				factionName = null; //Only applicable for configMode = 3
+				break;
+			case 2:
+				//sendOriginal = plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message"); //Must be handled within ChatListenerPrototype bc infinite recursion
+				isSoundOnly = false; //Only true for configMode = 4
+				requirePerm = false; //Permission group overrides this
+				citizensShowToAll = false; //Only applicable for configMode = -1
+				permGroup = ""; //null means this is skipped, "" means error & return without creating hologram
+				usePerm = null;
+				seePerm = null;
+				factionName = null; //Only applicable for configMode = 3
+				break;
+			case 3:
+				//sendOriginal = plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message"); //Must be handled within ChatListenerPrototype bc infinite recursion
+				isSoundOnly = false; //Only true for configMode = 4
+				requirePerm = false;
+				citizensShowToAll = false; //Only applicable for configMode = -1
+				permGroup = null; //Only applicable for configMode = 2
+				usePerm = null;
+				seePerm = null;
+				factionName = ""; //null means this is skipped, "" means error & return without creating hologram
+				break;
+			case 4:
+				//sendOriginal = plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message"); //Must be handled within ChatListenerPrototype bc infinite recursion
+				isSoundOnly = true; //Only true for configMode = 4
+				requirePerm = false;
+				citizensShowToAll = false; //Only applicable for configMode = -1
+				permGroup = null; //Only applicable for configMode = 2
+				usePerm = null;
+				seePerm = null;
+				factionName = null; //Only applicable for configMode = 3
+				break;
+			case 5:
+				//sendOriginal = plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message"); //Must be handled within ChatListenerPrototype bc infinite recursion
+				isSoundOnly = false; //Only true for configMode = 4
+				requirePerm = plugin.getConfig().getBoolean("ConfigFive_Require_Permissions");
+				citizensShowToAll = false; //Only applicable for configMode = -1
+				permGroup = null; //Only applicable for configMode = 2
+				usePerm = plugin.getConfig().getString("ConfigFive_Use_Permission");
+				seePerm = plugin.getConfig().getString("ConfigFive_See_Permission");
+				factionName = null; //Only applicable for configMode = 3
+				break;
+			case 6:
+				isSoundOnly = false; //Only true for configMode = 4
+				requirePerm = plugin.getConfig().getBoolean("ConfigSix_Require_Permissions");
+				citizensShowToAll = false; //Only applicable for configMode = -1
+				permGroup = null; //Only applicable for configMode = 2
+				usePerm = plugin.getConfig().getString("ConfigSix_Use_Permission");
+				seePerm = plugin.getConfig().getString("ConfigSix_See_Permission");
+				factionName = null; //Only applicable for configMode = 3
+				break;
+			default:
+				//Copy of case 0
+				//sendOriginal = plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message"); //Must be handled within ChatListenerPrototype bc infinite recursion
+				isSoundOnly = false; //Only true for configMode = 4
+				requirePerm = plugin.getConfig().getBoolean("ConfigZero_Require_Permissions");
+				citizensShowToAll = false; //Only applicable for configMode = -1
+				permGroup = null; //Only applicable for configMode = 2
+				usePerm = plugin.getConfig().getString("ConfigZero_Use_Permission");
+				seePerm = plugin.getConfig().getString("ConfigZero_See_Permission");
+				factionName = null; //Only applicable for configMode = 3
+				break;
 		}
-		
+
 		//-----
 		//----- Begin Hologram Creation Checks -----
 		//-----
@@ -271,7 +280,7 @@ public class DecentHologramsImplementation {
 		}
 		//Config Mode 3 - If isSoundOnly, we are done here
 		if (isSoundOnly) return;
-		
+
 		//-----
 		//----- Create/Manage Hologram -----
 		//-----
@@ -296,7 +305,7 @@ public class DecentHologramsImplementation {
 					&& (factionName == null || MPlayer.get(oP).getFactionName().equals(factionName)) //A faction isn't intended, or it is and the player is in it : Config Mode 3
 					&& (le instanceof Player && oP.canSee((Player) le))) //Players corporeal bodies are able to see eachother : Config Mode ALL
 				hologram.show(oP, 0);
-				//hologram.getVisibilityManager().showTo(oP);
+			//hologram.getVisibilityManager().showTo(oP);
 		}
 		//Maintain hologram position and kill when time comes
 		int lines = formatHologramLines(le, hologram, message);
@@ -312,7 +321,7 @@ public class DecentHologramsImplementation {
 					hologram.delete();
 					cancel();
 				}
-		}}.runTaskTimer(plugin, 1L, 1L);
+			}}.runTaskTimer(plugin, 1L, 1L);
 	}
-	
+
 }
