@@ -42,9 +42,9 @@ public class HolographicDisplaysImplementation {
 		existingHolograms.put(p.getUniqueId(), hList);
 		hologram.getVisibilityManager().setVisibleByDefault(false);
 		for(Player oP : Bukkit.getOnlinePlayers()){
-			if(((plugin.seeOwnBubble) || (!plugin.seeOwnBubble && oP.getName() != p.getName())) 
-					&& (oP.getWorld().getName().equals(p.getWorld().getName()) 
-					&& oP.getLocation().distance(p.getLocation()) <= plugin.distance) 
+			if(((plugin.seeOwnBubble) || (!plugin.seeOwnBubble && oP.getName() != p.getName()))
+					&& (oP.getWorld().getName().equals(p.getWorld().getName())
+					&& oP.getLocation().distance(p.getLocation()) <= plugin.distance)
 					&& (!requirePerm || (requirePerm && oP.hasPermission(seePerm)))
 					&& oP.canSee(p))
 				hologram.getVisibilityManager().showTo(oP);
@@ -62,8 +62,8 @@ public class HolographicDisplaysImplementation {
 					hologram.delete();
 					cancel();
 				}
-		}}.runTaskTimer(plugin, 1L, 1L);
-		
+			}}.runTaskTimer(plugin, 1L, 1L);
+
 		if(plugin.getConfig().getBoolean("ChatBubble_Play_Sound")) {
 			String sound = plugin.getConfig().getString("ChatBubble_Sound_Name").toLowerCase();
 			float volume = (float) plugin.getConfig().getDouble("ChatBubble_Sound_Volume");
@@ -77,7 +77,7 @@ public class HolographicDisplaysImplementation {
 			}
 		}
 	}
-	
+
 	public void handleOne(String message, Player p){
 		boolean sendOriginal = plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message");
 		boolean requirePerm = plugin.getConfig().getBoolean("ConfigOne_Require_Permissions");
@@ -97,9 +97,9 @@ public class HolographicDisplaysImplementation {
 		existingHolograms.put(p.getUniqueId(), hList);
 		hologram.getVisibilityManager().setVisibleByDefault(false);
 		for(Player oP : Bukkit.getOnlinePlayers()){
-			if(((plugin.seeOwnBubble) || (!plugin.seeOwnBubble && oP.getName() != p.getName())) 
-					&& (oP.getWorld().getName().equals(p.getWorld().getName()) 
-					&& oP.getLocation().distance(p.getLocation()) <= plugin.distance) 
+			if(((plugin.seeOwnBubble) || (!plugin.seeOwnBubble && oP.getName() != p.getName()))
+					&& (oP.getWorld().getName().equals(p.getWorld().getName())
+					&& oP.getLocation().distance(p.getLocation()) <= plugin.distance)
 					&& (!requirePerm || (requirePerm && oP.hasPermission(seePerm)))
 					&& oP.canSee(p))
 				hologram.getVisibilityManager().showTo(oP);
@@ -119,8 +119,8 @@ public class HolographicDisplaysImplementation {
 					hologram.delete();
 					cancel();
 				}
-		}}.runTaskTimer(plugin, 1L, 1L);
-		
+			}}.runTaskTimer(plugin, 1L, 1L);
+
 		if(plugin.getConfig().getBoolean("ChatBubble_Play_Sound")) {
 			String sound = plugin.getConfig().getString("ChatBubble_Sound_Name").toLowerCase();
 			float volume = (float) plugin.getConfig().getDouble("ChatBubble_Sound_Volume");
@@ -134,7 +134,7 @@ public class HolographicDisplaysImplementation {
 			}
 		}
 	}
-	
+
 	public void handleTwo(String message, Player p){
 		boolean sendOriginal = plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message");
 		if(existingHolograms.containsKey(p.getUniqueId())) {
@@ -158,9 +158,9 @@ public class HolographicDisplaysImplementation {
 		existingHolograms.put(p.getUniqueId(), hList);
 		hologram.getVisibilityManager().setVisibleByDefault(false);
 		for(Player oP : Bukkit.getOnlinePlayers()){
-			if(((plugin.seeOwnBubble) || (!plugin.seeOwnBubble && oP.getName() != p.getName())) 
-					&& (oP.getWorld().getName().equals(p.getWorld().getName()) 
-					&& oP.getLocation().distance(p.getLocation()) <= plugin.distance) 
+			if(((plugin.seeOwnBubble) || (!plugin.seeOwnBubble && oP.getName() != p.getName()))
+					&& (oP.getWorld().getName().equals(p.getWorld().getName())
+					&& oP.getLocation().distance(p.getLocation()) <= plugin.distance)
 					&& (oP.hasPermission(permGroup))
 					&& oP.canSee(p))
 				hologram.getVisibilityManager().showTo(oP);
@@ -180,8 +180,8 @@ public class HolographicDisplaysImplementation {
 					hologram.delete();
 					cancel();
 				}
-		}}.runTaskTimer(plugin, 1L, 1L);
-		
+			}}.runTaskTimer(plugin, 1L, 1L);
+
 		if(plugin.getConfig().getBoolean("ChatBubble_Play_Sound")) {
 			String sound = plugin.getConfig().getString("ChatBubble_Sound_Name").toLowerCase();
 			float volume = (float) plugin.getConfig().getDouble("ChatBubble_Sound_Volume");
@@ -195,7 +195,7 @@ public class HolographicDisplaysImplementation {
 			}
 		}
 	}
-	
+
 	public void handleThree(String message, Player p){
 		boolean sendOriginal = plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message");
 		if(existingHolograms.containsKey(p.getUniqueId())) {
@@ -212,9 +212,9 @@ public class HolographicDisplaysImplementation {
 		existingHolograms.put(p.getUniqueId(), hList);
 		hologram.getVisibilityManager().setVisibleByDefault(false);
 		for(Player oP : Bukkit.getOnlinePlayers()){
-			if(((plugin.seeOwnBubble) || (!plugin.seeOwnBubble && oP.getName() != p.getName())) 
-					&& (oP.getWorld().getName().equals(p.getWorld().getName()) 
-					&& oP.getLocation().distance(p.getLocation()) <= plugin.distance) 
+			if(((plugin.seeOwnBubble) || (!plugin.seeOwnBubble && oP.getName() != p.getName()))
+					&& (oP.getWorld().getName().equals(p.getWorld().getName())
+					&& oP.getLocation().distance(p.getLocation()) <= plugin.distance)
 					&& (MPlayer.get(oP).getFactionName().equals(faction))
 					&& oP.canSee(p))
 				hologram.getVisibilityManager().showTo(oP);
@@ -234,8 +234,8 @@ public class HolographicDisplaysImplementation {
 					hologram.delete();
 					cancel();
 				}
-		}}.runTaskTimer(plugin, 1L, 1L);
-		
+			}}.runTaskTimer(plugin, 1L, 1L);
+
 		if(plugin.getConfig().getBoolean("ChatBubble_Play_Sound")) {
 			String sound = plugin.getConfig().getString("ChatBubble_Sound_Name").toLowerCase();
 			float volume = (float) plugin.getConfig().getDouble("ChatBubble_Sound_Volume");
@@ -249,7 +249,7 @@ public class HolographicDisplaysImplementation {
 			}
 		}
 	}
-	
+
 	public void handleFour(String message, Player p){
 		if(plugin.getConfig().getBoolean("ChatBubble_Play_Sound")) {
 			String sound = plugin.getConfig().getString("ChatBubble_Sound_Name").toLowerCase();
@@ -264,7 +264,7 @@ public class HolographicDisplaysImplementation {
 			}
 		}
 	}
-	
+
 	public void handleFive(String message, Player p){
 		boolean sendOriginal = false;
 		boolean requirePerm = plugin.getConfig().getBoolean("ConfigFive_Require_Permissions");
@@ -284,9 +284,9 @@ public class HolographicDisplaysImplementation {
 		existingHolograms.put(p.getUniqueId(), hList);
 		hologram.getVisibilityManager().setVisibleByDefault(false);
 		for(Player oP : Bukkit.getOnlinePlayers()){
-			if(((plugin.seeOwnBubble) || (!plugin.seeOwnBubble && oP.getName() != p.getName())) 
-					&& (oP.getWorld().getName().equals(p.getWorld().getName()) 
-					&& oP.getLocation().distance(p.getLocation()) <= plugin.distance) 
+			if(((plugin.seeOwnBubble) || (!plugin.seeOwnBubble && oP.getName() != p.getName()))
+					&& (oP.getWorld().getName().equals(p.getWorld().getName())
+					&& oP.getLocation().distance(p.getLocation()) <= plugin.distance)
 					&& (!requirePerm || (requirePerm && oP.hasPermission(seePerm)))
 					&& oP.canSee(p))
 				hologram.getVisibilityManager().showTo(oP);
@@ -306,8 +306,8 @@ public class HolographicDisplaysImplementation {
 					hologram.delete();
 					cancel();
 				}
-		}}.runTaskTimer(plugin, 1L, 1L);
-		
+			}}.runTaskTimer(plugin, 1L, 1L);
+
 		if(plugin.getConfig().getBoolean("ChatBubble_Play_Sound")) {
 			String sound = plugin.getConfig().getString("ChatBubble_Sound_Name").toLowerCase();
 			float volume = (float) plugin.getConfig().getDouble("ChatBubble_Sound_Volume");
@@ -321,7 +321,61 @@ public class HolographicDisplaysImplementation {
 			}
 		}
 	}
-	
+
+	public void handleSix(String message, Player p){
+		boolean requirePerm = plugin.getConfig().getBoolean("ConfigSix_Require_Permissions");
+		String usePerm = plugin.getConfig().getString("ConfigSix_Use_Permission");
+		String seePerm = plugin.getConfig().getString("ConfigSix_See_Permission");
+		if(requirePerm && !p.hasPermission(usePerm))
+			return;
+		if(existingHolograms.containsKey(p.getUniqueId())) {
+			for(Hologram h : existingHolograms.get(p.getUniqueId())) {
+				if(!h.isDeleted())
+					h.delete();
+			}
+		}
+		final Hologram hologram = HologramsAPI.createHologram(plugin, p.getLocation().add(0.0, plugin.bubbleOffset, 0.0));
+		List<Hologram> hList = new ArrayList<Hologram>();
+		hList.add(hologram);
+		existingHolograms.put(p.getUniqueId(), hList);
+		hologram.getVisibilityManager().setVisibleByDefault(false);
+		for(Player oP : Bukkit.getOnlinePlayers()){
+			if(((plugin.seeOwnBubble) || (!plugin.seeOwnBubble && oP.getName() != p.getName()))
+					&& (oP.getWorld().getName().equals(p.getWorld().getName())
+					&& oP.getLocation().distance(p.getLocation()) <= plugin.distance)
+					&& (!requirePerm || (requirePerm && oP.hasPermission(seePerm)))
+					&& oP.canSee(p))
+				hologram.getVisibilityManager().showTo(oP);
+		}
+		int lines = formatHologramLines(p, hologram, message);
+
+		new BukkitRunnable() {
+			int ticksRun = 0;
+			@Override
+			public void run() {
+				ticksRun++;
+				if(!hologram.isDeleted())
+					hologram.teleport(p.getLocation().add(0.0, plugin.bubbleOffset + .25 * lines, 0.0));
+				if (ticksRun > plugin.life) {
+					hologram.delete();
+					cancel();
+				}
+			}}.runTaskTimer(plugin, 1L, 1L);
+
+		if(plugin.getConfig().getBoolean("ChatBubble_Play_Sound")) {
+			String sound = plugin.getConfig().getString("ChatBubble_Sound_Name").toLowerCase();
+			float volume = (float) plugin.getConfig().getDouble("ChatBubble_Sound_Volume");
+			if(!sound.equals("")) {
+				try {
+					p.getWorld().playSound(p.getLocation(), sound, volume, 1.0f);
+				}catch(Exception e) {
+					plugin.getServer().getConsoleSender().sendMessage("Something is wrong in your ChatBubble config.yml sound settings!");
+					plugin.getServer().getConsoleSender().sendMessage("Please ensure that 'ChatBubble_Sound_Name' works in a '/playsound' command test.");
+				}
+			}
+		}
+	}
+
 	public int formatHologramLines(LivingEntity e, Hologram hologram, String message){
 		List<String> lineList = new ArrayList<String>();
 		for(String formatLine : plugin.getConfig().getStringList("ChatBubble_Message_Format")){
@@ -333,7 +387,7 @@ public class HolographicDisplaysImplementation {
 				message = ChatBubbles.makeColors(message);
 				if(plugin.getConfig().getBoolean("ChatBubble_Strip_Formatting"))
 					message = ChatColor.stripColor(message);
-				
+
 				//-----
 				//----- Handle strings wrapping numerous lines -----
 				//-----
@@ -352,29 +406,29 @@ public class HolographicDisplaysImplementation {
 							period = plugin.length;
 						}
 						StringBuilder builder = new StringBuilder(
-						         s.length() + insert.length() * (s.length()/plugin.length)+1);
+								s.length() + insert.length() * (s.length()/plugin.length)+1);
 
-						    int index = 0;
-						    String prefix = "";
-						    while (index < s.length())
-						    {
-						        // Don't put the insert in the very first iteration.
-						        // This is easier than appending it *after* each substring
-						        builder.append(prefix);
-						        prefix = insert;
-						        builder.append(s.substring(index, 
-						            Math.min(index + period, s.length())));
-						        index += period;
-						    }
+						int index = 0;
+						String prefix = "";
+						while (index < s.length())
+						{
+							// Don't put the insert in the very first iteration.
+							// This is easier than appending it *after* each substring
+							builder.append(prefix);
+							prefix = insert;
+							builder.append(s.substring(index,
+									Math.min(index + period, s.length())));
+							index += period;
+						}
 						String replacement = builder.toString();
 						message = message.replace(s, replacement);
 					}
 				}
-				
+
 				StringBuilder sb = new StringBuilder(formatLine.replace("%chatbubble_message%", message));
 				int i = 0;
 				while (i + plugin.length < sb.length() && (i = sb.lastIndexOf(" ", i + plugin.length)) != -1) {
-				    sb.replace(i, i + 1, "\n");
+					sb.replace(i, i + 1, "\n");
 				}
 				for(String s : sb.toString().split("\\n")){
 					if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
@@ -411,9 +465,9 @@ public class HolographicDisplaysImplementation {
 			hologram.appendTextLine(s);
 		return lineList.size();
 	}
-	
+
 	public void onQuit(UUID uuid) {
 		existingHolograms.remove(uuid);
 	}
-	
+
 }
