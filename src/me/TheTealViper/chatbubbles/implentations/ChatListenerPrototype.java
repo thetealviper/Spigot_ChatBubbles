@@ -127,7 +127,7 @@ public class ChatListenerPrototype {
 		int checkpointIndex = 0;
 		for (Pattern p : BlacklistRegexList) {
 			Matcher m = p.matcher(lowercaseString);
-			while (m.find()) {
+			while (m.find() && checkpointIndex < message.length()) {
 				int findStart = m.start();
 				int findEnd = m.end();
 				modifiedString += message.substring(checkpointIndex, findStart);

@@ -43,9 +43,13 @@ public class DecentHologramsImplementation {
 		handleHologram(message, p, 4);
 	}
 
-	public void handleFive(String message, Player p){ handleHologram(message, p, 5); }
+	public void handleFive(String message, Player p){
+		handleHologram(message, p, 5);
+	}
 
-	public void handleSix(String message, Player p){ handleHologram(message, p, 6); }
+	public void handleSix(String message, Player p){
+		handleHologram(message, p, 6);
+	}
 
 	public int formatHologramLines(LivingEntity e, Hologram hologram, String message){
 		List<String> lineList = new ArrayList<String>();
