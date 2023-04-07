@@ -104,13 +104,12 @@ public class ChatListenerPrototype {
 					}
 				}
 				// If the message wasn't prefixed to be ignored, send the ChatBubble
-				if(prefix.equals("")) {
+				if(!prefix.equals("")) e.setMessage(e.getMessage().substring(prefix.length())); //This is necessary to remove prefix from message in chat
+				else {
 					//If player has manually toggled to disable the hologram functionality
 					if (!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
 					if (!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
 						e.setCancelled(true);
-					e.setMessage(e.getMessage().substring(prefix.length())); //This is necessary to remove prefix from message in chat
-					messageOverride = messageOverride.substring(prefix.length());
 					plugin.handleSix(messageOverride, e.getPlayer());
 				}
 				break;
