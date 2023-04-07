@@ -190,7 +190,7 @@ ConfigFive_See_Permission: "chatbubble.see"
 ConfigFive_Prefix_Characters:
  - "."
  - "。"
-#This is the character which if ANY message starts with will NOT be turned into a chatbubble.
+#This is the character which if ANY message starts with will be turned into a chatbubble.
 #Can be multiple characters long, but was never intended to be used that way.
 #Technically can be used as ANY custom command if set to "/cb" for example but definitely
 # not INTENDED for such use.
@@ -208,7 +208,7 @@ ConfigSix_See_Permission: "chatbubble.see"
 
 ConfigSix_Prefix_Characters:
  - "!"
-#This is the character which if ANY message starts with will be turned into a chatbubble.
+#This is the character which if ANY message starts with will NOT be turned into a chatbubble.
 #Can be multiple characters long, but was never intended to be used that way.
 #Technically can be used as ANY custom command if set to "/cb" for example but definitely
 # not INTENDED for such use.

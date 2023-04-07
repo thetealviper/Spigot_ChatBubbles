@@ -108,8 +108,8 @@ public class ChatListenerPrototype {
 				else {
 					//If player has manually toggled to disable the hologram functionality
 					if (!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
-					if (!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
-						e.setCancelled(true);
+					// Cancel the regular message from sending since not prefixed
+					e.setCancelled(true);
 					plugin.handleSix(messageOverride, e.getPlayer());
 				}
 				break;
