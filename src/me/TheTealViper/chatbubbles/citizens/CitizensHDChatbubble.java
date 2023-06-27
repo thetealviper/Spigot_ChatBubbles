@@ -8,13 +8,11 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.gmail.filoghost.holographicdisplays.api.Hologram;
-import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
-
 import me.TheTealViper.chatbubbles.ChatBubbles;
+import me.filoghost.holographicdisplays.api.HolographicDisplaysAPI;
+import me.filoghost.holographicdisplays.api.hologram.Hologram;
+import me.filoghost.holographicdisplays.api.hologram.VisibilitySettings.Visibility;
 
-@SuppressWarnings("deprecation")
-//Should probably update all HD classes at some point to conform with new methods
 public class CitizensHDChatbubble {
 	
 	private ChatBubbles plugin;
@@ -27,27 +25,28 @@ public class CitizensHDChatbubble {
 		this.seePerm = plugin.getConfig().getString("Citizens_Bubbles_See_Permission");
 	}
 	
-	public void createBubbleHD(LivingEntity p, String msg) {
-		if(plugin.HDI.existingHolograms.containsKey(p.getUniqueId())) {
-			for(Hologram h : plugin.HDI.existingHolograms.get(p.getUniqueId())) {
+	public void createBubbleHD(LivingEntity le, String msg) {
+		if(plugin.HDI.existingHolograms.containsKey(le.getUniqueId())) {
+			for(Hologram h : plugin.HDI.existingHolograms.get(le.getUniqueId())) {
 				if(!h.isDeleted())
 					h.delete();
 			}
 		}
-		final Hologram hologram = HologramsAPI.createHologram(plugin, p.getLocation().add(0.0, plugin.bubbleOffset, 0.0));
+		HolographicDisplaysAPI HDAPI = HolographicDisplaysAPI.get(plugin);
+		final Hologram hologram = HDAPI.createHologram(le.getLocation().add(0.0, plugin.bubbleOffset, 0.0));
 		List<Hologram> hList = new ArrayList<Hologram>();
 		hList.add(hologram);
-		plugin.HDI.existingHolograms.put(p.getUniqueId(), hList);
-		hologram.getVisibilityManager().setVisibleByDefault(false);
+		plugin.HDI.existingHolograms.put(le.getUniqueId(), hList);
+		hologram.getVisibilitySettings().setGlobalVisibility(Visibility.HIDDEN);
 		for(Player oP : Bukkit.getOnlinePlayers()){
-			if(((plugin.seeOwnBubble) || (!plugin.seeOwnBubble && oP.getName() != p.getName())) 
-					&& (oP.getWorld().getName().equals(p.getWorld().getName()) 
-					&& oP.getLocation().distance(p.getLocation()) <= plugin.distance) 
+			if(((plugin.seeOwnBubble) || (!plugin.seeOwnBubble && oP.getName() != le.getName())) 
+					&& (oP.getWorld().getName().equals(le.getWorld().getName()) 
+					&& oP.getLocation().distance(le.getLocation()) <= plugin.distance) 
 					&& (!requirePerm || (requirePerm && oP.hasPermission(seePerm)))
-					&& oP.canSee(p))
-				hologram.getVisibilityManager().showTo(oP);
+					&& oP.canSee(le))
+				hologram.getVisibilitySettings().setIndividualVisibility(oP, Visibility.VISIBLE);
 		}
-		int lines = plugin.HDI.formatHologramLines(p, hologram, msg);
+		int lines = plugin.HDI.formatHologramLines(le, hologram, msg);
 
 		new BukkitRunnable() {
 			int ticksRun = 0;
@@ -55,7 +54,7 @@ public class CitizensHDChatbubble {
 			public void run() {
 				ticksRun++;
 				if(!hologram.isDeleted())
-					hologram.teleport(p.getLocation().add(0.0, plugin.bubbleOffset + .25 * lines, 0.0));
+					hologram.setPosition(le.getLocation().add(0.0, plugin.bubbleOffset + .25 * lines, 0.0));
 				if (ticksRun > plugin.life) {
 					hologram.delete();
 					cancel();
@@ -67,7 +66,7 @@ public class CitizensHDChatbubble {
 			float volume = (float) plugin.getConfig().getDouble("ChatBubble_Sound_Volume");
 			if(!sound.equals("")) {
 				try {
-					p.getWorld().playSound(p.getLocation(), sound, volume, 1.0f);
+					le.getWorld().playSound(le.getLocation(), sound, volume, 1.0f);
 				}catch(Exception e) {
 					Bukkit.getServer().getConsoleSender().sendMessage("Something is wrong in your ChatBubble config.yml sound settings!");
 					Bukkit.getServer().getConsoleSender().sendMessage("Please ensure that 'ChatBubble_Sound_Name' works in a '/playsound' command test.");

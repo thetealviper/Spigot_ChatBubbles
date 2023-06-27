@@ -196,7 +196,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 	}
 
 	public void handleZero(String message, Player p){
-		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() { //This seems silly but is necessary for HolographicDisplays to function
 			if(foundHolographicDisplays)
 				HDI.handleZero(message, p);
 			else if(foundDecentHolograms)
@@ -205,7 +205,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 	}
 
 	public void handleOne(String message, Player p){
-		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() { //This seems silly but is necessary for HolographicDisplays to function
 			if(foundHolographicDisplays)
 				HDI.handleOne(message, p);
 			else if(foundDecentHolograms)
@@ -214,7 +214,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 	}
 
 	public void handleTwo(String message, Player p){
-		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() { //This seems silly but is necessary for HolographicDisplays to function
 			if(foundHolographicDisplays)
 				HDI.handleTwo(message, p);
 			else if(foundDecentHolograms)
@@ -223,7 +223,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 	}
 
 	public void handleThree(String message, Player p){
-		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() { //This seems silly but is necessary for HolographicDisplays to function
 			if(foundHolographicDisplays)
 				HDI.handleThree(message, p);
 			else if(foundDecentHolograms)
@@ -232,7 +232,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 	}
 
 	public void handleFour(String message, Player p){
-		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() { //This seems silly but is necessary for HolographicDisplays to function
 			if(foundHolographicDisplays)
 				HDI.handleFour(message, p);
 			else if(foundDecentHolograms)
@@ -241,7 +241,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 	}
 
 	public void handleFive(String message, Player p){
-		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() { //This seems silly but is necessary for HolographicDisplays to function
 			if(foundHolographicDisplays)
 				HDI.handleFive(message, p);
 			else if(foundDecentHolograms)
@@ -250,7 +250,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 	}
 
 	public void handleSix(String message, Player p){
-		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {public void run() { //This seems silly but is necessary for HolographicDisplays to function
 			if(foundHolographicDisplays)
 				HDI.handleSix(message, p);
 			else if(foundDecentHolograms)

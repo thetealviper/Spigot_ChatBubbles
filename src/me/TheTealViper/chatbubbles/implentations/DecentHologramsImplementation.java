@@ -296,7 +296,8 @@ public class DecentHologramsImplementation {
 		existingHolograms.put(le.getUniqueId(), hList);
 		//Hide hologram by default (exception for Citizens)
 		if (!citizensShowToAll)
-			hologram.hideAll();
+			hologram.setDefaultVisibleState(false); //New API code. Works as of 1.20.1
+//			hologram.hideAll(); //Unlisted yet deprecated API code. No longer works. Been broken since like 1.18
 		//Config Mode 2 permGroup Error Check - If a blank string then player doesn't have one and shouldn't make a hologram in mode 2
 		if (permGroup != null && permGroup == "") return;
 		//Handle visibility logic
@@ -308,8 +309,9 @@ public class DecentHologramsImplementation {
 					&& (permGroup == null || oP.hasPermission(permGroup)) //A permission group isn't intended, or it is and the player has it : Config Mode 2
 					&& (factionName == null || MPlayer.get(oP).getFactionName().equals(factionName)) //A faction isn't intended, or it is and the player is in it : Config Mode 3
 					&& (le instanceof Player && oP.canSee((Player) le))) //Players corporeal bodies are able to see eachother : Config Mode ALL
-				hologram.show(oP, 0);
-			//hologram.getVisibilityManager().showTo(oP);
+				hologram.setShowPlayer(oP); //New API code. Works as of 1.20.1
+//				hologram.show(oP, 0); //Unlisted yet deprecated API code. No longer works. Been broken since like 1.18
+//				hologram.getVisibilityManager().showTo(oP); //Unlisted yet deprecated API code. No longer works. Been broken since like 1.17
 		}
 		//Maintain hologram position and kill when time comes
 		int lines = formatHologramLines(le, hologram, message);
