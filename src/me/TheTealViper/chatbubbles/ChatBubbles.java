@@ -41,6 +41,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 	public DecentHologramsImplementation DHI;
 	public static EventPriority eventPriority;
 	private ChatBubbleTrait trait;
+	private PluginFile messagesPF;
 
 	public void onEnable(){
 		if(Bukkit.getServer().getPluginManager().getPlugin("DecentHolograms") != null) {
@@ -114,6 +115,7 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 				break;
 		}
 		ChatListenerPrototype.RegisterBlacklist(this);
+		messagesPF = new PluginFile(this, "messages.yml", "messages.yml");
 	}
 
 	public void onDisable(){
@@ -141,33 +143,33 @@ public class ChatBubbles extends JavaPlugin implements Listener{
 					handleOne(message, p);
 					//Handle /cb reload confusion warning
 					if (message.equalsIgnoreCase("reload")) {
-						p.sendMessage("ChatBubbles Warning: '/cb <msg>' sends a message. If you meant to reload, type /cbreload");
+						p.sendMessage(makeColors(messagesPF.getString("CB_Reload_Warning")));
 					}
 				}
 			}
 			if((label.equalsIgnoreCase("chatbubblereload") || label.equalsIgnoreCase("cbreload")) && p.hasPermission("chatbubbles.reload")){
 				reloadConfig();
 				initVars();
-				p.sendMessage("Reloaded ChatBubbles Successfully");
-				getServer().getConsoleSender().sendMessage("Reloaded ChatBubbles Successfully");
+				p.sendMessage(makeColors(messagesPF.getString("Reload_Success")));
+				getServer().getConsoleSender().sendMessage(makeColors(messagesPF.getString("Reload_Success")));
 			}
 			if((label.equalsIgnoreCase("chatbubbletoggle") || label.equalsIgnoreCase("cbtoggle") || label.equalsIgnoreCase("cbt")) && p.hasPermission("chatbubbles.toggle")) {
 				boolean currentState = togglePF.getBoolean(p.getUniqueId().toString());
 				if(currentState)
-					p.sendMessage("ChatBubbles toggled off!");
+					p.sendMessage(makeColors(messagesPF.getString("Toggle_Off")));
 				else
-					p.sendMessage("ChatBubbles toggled on!");
+					p.sendMessage(makeColors(messagesPF.getString("Toggle_On")));
 				togglePF.set(p.getUniqueId().toString(), !currentState);
 				togglePF.save();
 			}
 		} else {
 			if(label.equalsIgnoreCase("chatbubble") || label.equalsIgnoreCase("cb")){
-				sender.sendMessage("/cbreload - Reloads ChatBubbles.");
+				sender.sendMessage(makeColors(messagesPF.getString("Reload_Console_Help")));
 			}
 			if((label.equalsIgnoreCase("chatbubblereload") || label.equalsIgnoreCase("cbreload"))){
 				reloadConfig();
 				initVars();
-				sender.sendMessage("Reloaded ChatBubbles Successfully");
+				sender.sendMessage(makeColors(messagesPF.getString("Reload_Success")));
 			}
 		}
 		return false;

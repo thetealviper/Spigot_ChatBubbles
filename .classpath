@@ -6,61 +6,17 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/DecentHolograms-2.7.7.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/1.19.2 Parkour Server/bundler/libraries/bungeecord-chat-1.16-R0.4.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/1.19.2 Parkour Server/bundler/libraries/commons-io-2.11.0.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/1.19.2 Parkour Server/bundler/libraries/commons-lang-2.6.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/1.19.2 Parkour Server/bundler/libraries/commons-lang3-3.12.0.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/1.19.2 Parkour Server/bundler/libraries/snakeyaml-1.33.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/1.19.2 Parkour Server/bundler/libraries/spigot-api-1.19.2-R0.1-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/Factions.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/HolographicDisplays.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/MassiveCore.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/citizensapi-2.0.30-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/PlaceholderAPI-2.11.3-DEV-160.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/1.20.1 Server/plugins/PlaceholderAPI-2.11.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/1.20.1 Server/bundler/libraries/bungeecord-chat-1.16-R0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/1.20.1 Server/bundler/libraries/commons-io-2.11.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/1.20.1 Server/bundler/libraries/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/1.20.1 Server/bundler/libraries/commons-lang3-3.12.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/1.20.1 Server/bundler/libraries/snakeyaml-2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/1.20.1 Server/bundler/libraries/spigot-api-1.20.1-R0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/citizensapi-2.0.30-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/DecentHolograms-2.8.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/Factions.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/HolographicDisplays-3.0.3-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Aaron/Documents/Minecraft Stuff/MassiveCore.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,0 +1,5 @@
+CB_Reload_Warning: "ChatBubbles Warning: '/cb <msg>' sends a message. If you meant to reload, type /cbreload"
+Reload_Console_Help: "/cbreload - Reloads ChatBubbles."
+Reload_Success: "Reloaded ChatBubbles Successfully"
+Toggle_Off: "ChatBubbles toggled off!"
+Toggle_On: "ChatBubbles toggled on!"
