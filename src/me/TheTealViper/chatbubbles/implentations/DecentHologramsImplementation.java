@@ -289,7 +289,8 @@ public class DecentHologramsImplementation {
 		//----- Create/Manage Hologram -----
 		//-----
 		//Create hologram and input into database
-		final Hologram hologram = DHAPI.createHologram(System.currentTimeMillis() + le.getName() + "", le.getLocation().add(0.0, plugin.bubbleOffset, 0.0));
+		String sanitizedName = le.getName().replaceAll("[^a-zA-Z0-9-_]", "");
+		final Hologram hologram = DHAPI.createHologram(System.currentTimeMillis() + sanitizedName + "", le.getLocation().add(0.0, plugin.bubbleOffset, 0.0));
 		hologram.enable();
 		List<Hologram> hList = new ArrayList<Hologram>();
 		hList.add(hologram);
