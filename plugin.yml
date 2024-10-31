@@ -1,6 +1,6 @@
 name: "ChatBubbles"
 author: TheTealViper
-version: "1.21.0.a.1"
+version: "1.21.0.b.1"
 api-version: "1.21"
 description: "ChatBubbles above players' heads"
 main: me.TheTealViper.chatbubbles.ChatBubbles

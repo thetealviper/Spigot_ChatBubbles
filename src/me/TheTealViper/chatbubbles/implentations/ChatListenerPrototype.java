@@ -40,8 +40,10 @@ public class ChatListenerPrototype {
 			case 0:
 				//If player has manually toggled to disable the hologram functionality
 				if(!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
-				if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
+				if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) { //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
 					e.setCancelled(true);
+					plugin.getLogger().info("[ChatBubbles Cancelled Message]<" + e.getPlayer().getDisplayName() + ">" + e.getMessage()); //If we cancel the message, still send it to log for mod reasons
+				}
 				plugin.handleZero(messageOverride, e.getPlayer());
 				break;
 			case 1:
@@ -50,16 +52,20 @@ public class ChatListenerPrototype {
 			case 2:
 				//If player has manually toggled to disable the hologram functionality
 				if(!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
-				if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
+				if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) { //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
 					e.setCancelled(true);
+					plugin.getLogger().info("[ChatBubbles Cancelled Message]<" + e.getPlayer().getDisplayName() + ">" + e.getMessage()); //If we cancel the message, still send it to log for mod reasons
+				}
 				plugin.handleTwo(messageOverride, e.getPlayer());
 				break;
 			case 3:
 				if(Bukkit.getServer().getPluginManager().getPlugin("Factions") != null) {
 					//If player has manually toggled to disable the hologram functionality
 					if(!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
-					if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
+					if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) { //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
 						e.setCancelled(true);
+						plugin.getLogger().info("[ChatBubbles Cancelled Message]<" + e.getPlayer().getDisplayName() + ">" + e.getMessage()); //If we cancel the message, still send it to log for mod reasons
+					}
 					plugin.handleThree(messageOverride, e.getPlayer());
 				}else{
 					plugin.getServer().getConsoleSender().sendMessage("ChatBubbles is set to configuration mode 3 but Factions can't be found!");
@@ -68,8 +74,10 @@ public class ChatListenerPrototype {
 			case 4:
 				//If player has manually toggled to disable the hologram functionality
 				if(!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
-				if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
+				if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) { //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
 					e.setCancelled(true);
+					plugin.getLogger().info("[ChatBubbles Cancelled Message]<" + e.getPlayer().getDisplayName() + ">" + e.getMessage()); //If we cancel the message, still send it to log for mod reasons
+				}
 				plugin.handleFour(messageOverride, e.getPlayer());
 				break;
 			case 5:
@@ -86,8 +94,10 @@ public class ChatListenerPrototype {
 				if(!foundPrefix.equals("")) {
 					//If player has manually toggled to disable the hologram functionality
 					if(!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
-					if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
+					if(!plugin.getConfig().getBoolean("ChatBubble_Send_Original_Message")) { //This MUST be handled here. If handled by manual player.chat() leads to infinite recursion onPlayerChatEvent
 						e.setCancelled(true);
+						plugin.getLogger().info("[ChatBubbles Cancelled Message]<" + e.getPlayer().getDisplayName() + ">" + e.getMessage()); //If we cancel the message, still send it to log for mod reasons
+					}
 					e.setMessage(e.getMessage().substring(foundPrefix.length())); //This is uniquely necessary to this config mode 5
 					messageOverride = messageOverride.substring(foundPrefix.length());
 					plugin.handleFive(messageOverride, e.getPlayer());
@@ -110,6 +120,7 @@ public class ChatListenerPrototype {
 					if (!plugin.togglePF.getBoolean(e.getPlayer().getUniqueId().toString())) return;
 					// Cancel the regular message from sending since not prefixed
 					e.setCancelled(true);
+					plugin.getLogger().info("[ChatBubbles Cancelled Message]<" + e.getPlayer().getDisplayName() + ">" + e.getMessage()); //If we cancel the message, still send it to log for mod reasons
 					plugin.handleSix(messageOverride, e.getPlayer());
 				}
 				break;
